@@ -147,10 +147,11 @@ hr {
     <ul class="right">
     
       <% if user_signed_in? %> 
+      <% @nombreusernav = current_user.username.each_char {|c| print c, ' ' } %>
    <li class="divider"></li>
       <li class="has-dropdown">
 
-        <a><strong><%= current_user.username %></strong></a>
+        <a><%= @nombreusernav %></a>
         <ul class="dropdown">
          <li><%= link_to "s a l i r", destroy_user_session_path, :method => :delete %></li>
         </ul>
