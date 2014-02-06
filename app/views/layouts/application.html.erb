@@ -248,7 +248,17 @@ hr {
     
       <li><div class="my-div-bottom-green"><%= link_to Video.first.video_title.upcase,Video.first,:class => "fuente-tres" %></div></li>
       <p></p>
-      <li><div><%= Video.first.video_url.html_safe%></div></li>
+      <li>
+        <% if Video.first.video_url.include? "youtube.com"
+        @numero = Video.first.video_url.partition("=").last
+        @video_code = '<iframe width="100%" src="//www.youtube.com/embed/'+@numero+'" frameborder="0" allowfullscreen></iframe>'
+        end %>
+        <% if Video.first.video_url.include? "vimeo.com" 
+         @numero = Video.first.video_url.partition(".com/").last
+         @video_code = '<iframe width="100%" src="//player.vimeo.com/video/'+@numero+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+        end %>
+
+        <div><%= @video_code.html_safe%></div></li>
       
       </ul>
 

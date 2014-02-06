@@ -9,7 +9,7 @@
     <% @posts.each do |post| %>
      
         
-        <div class="my-div-bottom"><%= link_to post.post_title.upcase,post,:class => "fuente-tres" %></div>
+        <div class="my-div-bottom"><%= link_to post.post_title.upcase,post,:allposts => 0,:class => "fuente-tres" %></div>
         <% if current_user.try(:admin?)%>
         |<td><%= link_to ' Editar', edit_post_path(post) %></td> |
         <td><%= link_to ' Eliminar', post, method: :delete, data: { confirm: 'Esta seguro que desea eliminar la noticia?' } %></td> |

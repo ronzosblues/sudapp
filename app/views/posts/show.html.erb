@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <% if current_user.try(:admin?)%>
 <%= link_to 'Editar', edit_post_path(@post) %> |
@@ -21,14 +21,24 @@
   <%= simple_format(@post.post_body, :style => "color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;") %>
 </p>
 <hr>
+<% if @allposts == 1 %>
 <p>Comentarios:</p>
+<% else %>
+<p>Ultimos Comentarios:</p>
+<% end %>
 <% @comments.each do |comment| %>
   <% if comment.post_id == @post.id %>
-      <div class="fuente-tres"><strong><%= comment.user.username%> |</strong> <%= simple_format(comment.content)%></div>
-        <% if current_user.try(:admin?) || current_user == comment.user %>
-          <div><p><%= link_to 'Eliminar', comment, method: :delete, data: { confirm: 'Esta seguro que desea eliminar el comentario?' } %></p></div>
-        <% end %> 
+      <div class="fuente-tres"><strong><%= comment.user.username%> |</strong>
+      <% if current_user.try(:admin?) || current_user == comment.user %>
+      <%= link_to 'eliminar', comment, method: :delete, data: { confirm: 'Esta seguro que desea eliminar el comentario?' } %>
+        <% end %>  </div>
+
+        <div class="fuente-tres"><%= simple_format(comment.content)%></div>
+        
   <% end %> 
+<% end %>
+<% if @allposts == 1 %>
+<div><%= link_to "MOSTRAR TODOS LOS COMENTARIOS", :controller => "/post", :action => "show",:class => "link-azul" %></div>
 <% end %>
 <hr>
 <% if user_signed_in? %>

@@ -24,9 +24,14 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @allposts = params[:allposts]
     @comment_post = CommentPost.new
-    @comments = CommentPost.find(:all,:limit => 20)
-    @comments = @comments.sort! { |t| t.created_at } 
+    if @allposts == 0
+      @comments = CommentPost.find(:all,:limit => 5).sort { |a,b| b.created_at <=> a.created_at }
+    else
+      @comments = CommentPost.find(:all).sort { |a,b| b.created_at <=> a.created_at }
+    end
+
   end
 
   # GET /posts/new
