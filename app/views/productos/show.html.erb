@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h4><div class="titulo"><%= @producto.nombre_producto.upcase %></div></h4>
+  | <%= link_to ' Editar', edit_producto_path(@producto) %> |
+<%= link_to 'Volver', productos_path %> |
+
+</p>
+
+<p>
+Talles: <%= @producto.descripcion_producto %> | Precio: $<%= @producto.precio %>
+</p>
+
+<p>
+<%= image_tag @producto.foto_producto.url, :class => "th" %>
+</p>
+
+
+

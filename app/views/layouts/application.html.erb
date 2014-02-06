@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Sudamerica | Skateboarding</title>
+  <link href="../assets/css/foundation.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Pathway+Gothic+One' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton">
+   <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic+SC' rel='stylesheet' type='text/css'>
+  <%= javascript_include_tag "vendor/modernizr" %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+
+<style type="text/css">
+
+input[type=submit] {
+    border-radius: 5px;
+    border: 0;
+    font-family: Tahoma;
+    background: #A9F5F2;
+    height: 25px;
+ 
+}
+
+
+.back-text-area-field{
+background:#F7F8E0;
+border: 0;
+}
+
+.texto{color:#A4A4A4; font-family: 'Carrois Gothic SC', sans-serif; }
+
+.th-item{
+    height: 11em;
+    width: 100%;
+    overflow: hidden;
+    background-position: center;
+}
+
+img { max-width: 100%; width: 100%;}
+
+.galeria { min-height: 180px; max-height: 180px;}
+
+.imagen-ancho-max { width: 100%;}
+
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6 {
+    
+    line-height: 1;
+    margin-bottom: 0.625rem;
+    color:#F6E3CE ; }
+
+
+
+.top-bar-section li a:not(.button):hover {
+  font-family: 'Pathway Gothic One', sans-serif;
+}
+.top-bar-section li a:not(.button) {
+  font-family: 'Pathway Gothic One', sans-serif;
+}
+
+.link-azul{font-family: 'Carrois Gothic SC', sans-serif;}
+a.link-azul:link {color:#49aec3;}      /* unvisited link */
+a.link-azul:visited {color:#49aec3;}  /* visited link */
+a.link-azul:hover {color:#49aec3;}  /* mouse over link */
+a.link-azul:active {color:#49aec3;}  /* selected link */
+
+a:link {color:#A4A4A4;}      /* unvisited link */
+a:visited {color:#A4A4A4;}  /* visited link */
+a:hover {color:#FFFFFF;}  /* mouse over link */
+a:active {color:#A4A4A4;}  /* selected link */
+
+a.fuente-uno:link {color:#FFFFFF;font-size:200%}      /* unvisited link */
+a.fuente-uno:visited {color:#FFFFFF;}  /* visited link */
+a.fuente-uno:hover {color:#61380B;}  /* mouse over link */
+a.fuente-uno:active {color:#FFFFFF;}  /* selected link */
+
+a.fuente-dos:link {color:#61380B;font-size:150%}      /* unvisited link */
+a.fuente-dos:visited {color:#61380B;}  /* visited link */
+a.fuente-dos:hover {color:#FFFFFF;}  /* mouse over link */
+a.fuente-dos:active {color:#FFFFFF;}  /* selected link */
+
+.fuente-uno{
+font-family: 'Anton', serif;
+font-size: 200%;
+}
+.fuente-dos{
+font-family: 'Anton', serif;
+font-size: 150%;
+color: #49aec3;
+}
+.fuente-tres{
+font-family: 'Carrois Gothic SC', sans-serif;
+}
+.fuente-cuatro{
+font-family: 'Carrois Gothic SC', sans-serif;
+
+}
+
+.titulo{
+font-family: 'Anton', serif;
+font-size: 200%;
+color:#A9F5E1
+}
+
+
+.my-div-bottom{
+  border-width: 2px; 
+  border-bottom-width:1px; 
+  border-bottom-color:#101010 ; 
+  border-bottom-style: solid;
+}
+
+.my-div-bottom-green{
+  border-width: 2px; 
+  border-bottom-width:1px; 
+  border-bottom-color:#07190B; 
+  border-bottom-style: solid;
+}
+
+ul{
+list-style-type: none;
+}
+
+hr {
+  border: 0;
+  color: #151515;
+  background-color: #151515;
+  height: 1px;
+}
+
+
+
+
+</style>
+
+</head>
+<body style="background-color:#000000; color:#FFFFFF">
+
+<p></p>
+<div class="row display">
+<div class="large-12 columns"><span class="show-for-small"></span><span class="hide-for-small">
+ <nav class="top-bar" style="link-font-family:body-font-family:'Pathway Gothic One', sans-serif;"  data-topbar >
+
+       <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+    
+      <% if user_signed_in? %> 
+   <li class="divider"></li>
+      <li class="has-dropdown">
+
+        <a><strong><%= current_user.username %></strong></a>
+        <ul class="dropdown">
+         <li><%= link_to "s a l i r", destroy_user_session_path, :method => :delete %></li>
+        </ul>
+        </li>
+        <li class="divider"></li>
+        <li><%= link_to "s a l i r", destroy_user_session_path, :method => :delete %></li>
+      
+
+<% else %>
+<li class="name">
+ <%= link_to "e n t r a r", new_user_session_path %>
+</li>
+<li class="divider"></li>
+ <li class="name">
+  <%= link_to "r e g i s t r a t e", new_user_registration_path %>
+  </li>
+
+<% end %>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <% if current_user.try(:admin?)%>
+            <li><%= link_to "a d m i n i s t r a d o r",  :controller => "/admin" %></li>
+            <li class="divider"></li>
+      <% end %>
+            <li><%= link_to "i n i c i o",  :controller => "/welcome" %></li>
+            <li class="divider"></li>
+            <li><%= link_to "n o t a s",  :controller => "/posts" %></li>
+            <li class="divider"></li>
+            <li class="has-dropdown">
+             <%= link_to "f o t o s",  :controller => "/albums" %>
+               <ul class="dropdown">
+                <% Album.all.each do |album| %>
+                 <li><%= link_to album.album_title, album %></li>
+                 <% end %>
+               </ul>
+            </li>
+            <li class="divider"></li>
+             <li><%= link_to "v i d e o s",  :controller => "/videos" %></li>
+              <li class="divider"></li>
+             <li><%= link_to "s k a t e r s / r o s a r i n o s",  :controller => "/skaters" %></li>
+             <li class="divider"></li>
+             <li><%= link_to "i n d u m e n t a r i a",  :controller => "/tipo_productos" %></li>
+            <li class="divider"></li>
+            <li><%= link_to "c o n t a c t o",  :controller => "/contact" %></li>
+            
+    </ul>
+  </section>
+      </nav>
+      <div class="row display">
+
+
+</div>
+
+
+
+<div class="panel"  style="color:#FFFFFF ;background-color: transparent; border-color: transparent;"> 
+  <div class="row">
+
+<div class="large-9 columns">
+<img src="/images/logo2.jpg" style="width:100%;"  />
+<p><% flash.each do |name, msg| %>
+<%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %></p>
+
+<%= yield %>
+
+</div>
+
+<aside class="large-3 columns">
+
+
+      <ul class="side-nav">
+        <li><%= link_to "FOTOS", {:controller => "/albums"},:class => "fuente-uno" %></li>
+        <li><%= link_to "NOTAS", {:controller => "/posts"},:class => "fuente-uno" %></li>
+        <li><%= link_to "SKATERS", {:controller => "/skaters"},:class => "fuente-uno" %></li>
+        <li><%= link_to "INDUMENTARIA", {:controller => "/tipo_productos"},:class => "fuente-uno" %></li>
+        <li><%= link_to "VIDEOS", {:controller => "/videos"},:class => "fuente-uno" %></li>
+      </ul>
+
+      
+        <h5 style="color:#49aec3;">saskateboarding.com.ar</h5>
+        <p style="color:#49aec3;font-family: 'Carrois Gothic SC', sans-serif;">El primer sitio independiente de skateboarding de la ciudad de Rosario.</p>
+     
+      <ul>
+        <li><div class="fuente-cuatro">ULTIMAS NOTAS</div></li>
+ 
+       <% Post.find(:all, :order => "id desc", :limit => 2).reverse.each do |post| %>
+       <li><div class="my-div-bottom-green"><%= link_to post.post_title.upcase,post,:class => "fuente-tres" %></div></li>
+       <% end %>
+          <li><div><%= link_to "VER TODAS",{:controller => "/posts"},:class => "link-azul" %></div></li>
+            <p></p>
+      <li><div class="fuente-cuatro">VIDEO DESTACADO</div></li>
+    
+      <li><div class="my-div-bottom-green"><%= link_to Video.first.video_title.upcase,Video.first,:class => "fuente-tres" %></div></li>
+      <p></p>
+      <li><div><%= Video.first.video_url.html_safe%></div></li>
+      
+      </ul>
+
+    
+    </aside>
+</div>
+
+</div>
+<p></p>
+
+<p></p>
+<img src="/images/footer.jpg" style="width:100%;"  />
+
+
+
+</div>
+</div>
+</body>
+</html>

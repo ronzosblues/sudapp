@@ -1,0 +1,39 @@
+
+<div class="fuente-dos">PEDIDOS</div>
+<% @tienepedido  %>
+<% @total = 0 %>
+<p></p>
+
+    <% User.all.each do |usuario| %>
+
+        <% Pedido.all.each do |pedido| %>
+            <% if pedido.user == usuario %>
+                 <% @tienepedido = 1 %>
+                    <% break %>
+            <% else %>
+                 <% @tienepedido = 0 %>
+            <% end %>
+        <% end %>
+
+        <% if @tienepedido == 1 %>
+        
+        <p><%= usuario.username.upcase %> | <%= usuario.email %></p>
+        
+        <% Pedido.all.each do |pedido| %>
+        <% if pedido.user == usuario %>
+
+            Producto: <%= link_to pedido.producto.nombre_producto, pedido %> | Fecha: <%= pedido.fecha %> | precio: <%= pedido.producto.precio %> | <%= link_to 'Eliminar', pedido, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% @total = @total + pedido.producto.precio %>
+            <p></p>
+   
+        <% end %>
+        <% end %>
+          <p>Total: $<%= @total %></p>
+        <hr>
+
+        <% end %>
+    <% end %>
+
+
+<br>
+

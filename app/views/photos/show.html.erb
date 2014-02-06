@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= @photo.photo_title %>
+
+| <%= link_to 'Volver', photos_path %> |
+</p>
+
+
+ <div><%= image_tag @photo.photo.url,:class => "th"%></div> 
+  <p></p>
+
+
+<% @comments.each do |comment| -%>
+  <% if comment.photo_id==@photo.id %>
+      <p><strong><%= comment.user.username%></strong> <%= simple_format(comment.content)%></p>
+        <% if current_user.try(:admin?) %>
+          <p><%= link_to 'Eliminar', comment, method: :delete, data: { confirm: 'Esta seguro que desea eliminar el comentario?' } %></p>
+        <% end %> 
+  <% end %> 
+<% end %>
+
+<% if user_signed_in? %>
+<%= form_for @comment_photo do |f| %>
+  <div class="field">
+    <p><%= f.label 'comentario' %></p>
+    <%= f.text_area :content %>
+    <%= f.hidden_field :photo_id, :value => @photo.id %>
+    <%= f.hidden_field :user_id, :value => current_user.try(:id) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Comentar"  %>
+  </div>
+
+  <% end %>
+
+    <% else %>
+  <p></p>
+  Para comentar debe ser un usuario registrado.
+  <% end %>

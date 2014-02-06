@@ -1,0 +1,19 @@
+<h1>Listing photos</h1>
+<%= link_to 'Agregar una nueva foto', new_photo_path %>
+<p></p>
+
+    <% @photos.each do |photo| %>
+        <td><%= photo.photo_title %>.</td>
+        <td> Album: <%= photo.album.album_title %></td>
+        <td><%= link_to ' | Mostrar', photo %></td>
+        <% if current_user.try(:admin?)%>
+        <td><%= link_to ' | Editar', edit_photo_path(photo) %></td>
+        <td><%= link_to ' | Eliminar', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <p></p>
+      
+    <% end %>
+
+
+
+

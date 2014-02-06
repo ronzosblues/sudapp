@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  skater_name: MyString
+  skater_body: MyText
+  skater_photo: 
+
+two:
+  skater_name: MyString
+  skater_body: MyText
+  skater_photo: 

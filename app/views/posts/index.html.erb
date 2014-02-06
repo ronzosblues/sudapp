@@ -1,0 +1,24 @@
+
+<div class="fuente-dos">NOTAS</div>
+<p></p>
+<!--<p><div class="fuente-cuatro"><strong>NOTAS</strong></div></p>-->
+<% if current_user.try(:admin?)%>
+<%= link_to 'Agregar una nueva noticia', new_post_path %>
+<% end %>
+<p></p>
+    <% @posts.each do |post| %>
+     
+        
+        <div class="my-div-bottom"><%= link_to post.post_title.upcase,post,:class => "fuente-tres" %></div>
+        <% if current_user.try(:admin?)%>
+        |<td><%= link_to ' Editar', edit_post_path(post) %></td> |
+        <td><%= link_to ' Eliminar', post, method: :delete, data: { confirm: 'Esta seguro que desea eliminar la noticia?' } %></td> |
+        <td><%= link_to 'Asignar al inicio', :controller => '/posts', :action => 'inicio', :id => post.id %></td> |
+
+   
+      <% end %><p></p>
+    <% end %>
+<br>
+
+
+
