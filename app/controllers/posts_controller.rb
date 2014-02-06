@@ -25,7 +25,8 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @comment_post = CommentPost.new
-    @comments = CommentPost.find(:all,:limit => 10)
+    @comments = CommentPost.find(:all,:limit => 20)
+    @comments = @comments.sort! { |t| t.created_at } 
   end
 
   # GET /posts/new

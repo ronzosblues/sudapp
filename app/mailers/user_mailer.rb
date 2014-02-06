@@ -3,12 +3,13 @@ class UserMailer < ActionMailer::Base
 
 
 
-def newsletter(title,body)
+def newsletter(title,body,user)
 	@newsletter_body = body
 	@newsletter_title = title
+	@user = user
 	mail(
-	from: 'ronzo.orlandini@gmail.com',
-	to: 'ronzo.orlandini@gmail.com',
+	from: 'sudamerica.skateboarding@gmail.com',
+	to: @user.email,
 	subject: @newsletter_title 
 	)
 end

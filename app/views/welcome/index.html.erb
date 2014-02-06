@@ -18,17 +18,17 @@
 <h4><div class = "titulo"><%= @post_inicio.post_title.upcase %></div></h4>
 
 <% if @post_inicio.post_autor != "" %>
-<h6 style="color:">Por : <%= @post_inicio.post_autor%></h6>
+<h6>Por : <%= @post_inicio.post_autor%></h6>
 <% end %>
 </p>
 <div>
 <p><%= image_tag @post_inicio.post_photo.url, :class => "th"%>
 </p>
 </div>
-<p>
-<div><%= simple_format(@post_inicio.post_body, :style => "color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;") %></div>
-</p>
-<p><div><%= link_to "LEER NOTA ENTERA",@post_inicio,:class => "link-azul" %></div></p>
+<p><%= simple_format(truncate(@post_inicio.post_body, length: 600, omission: '...'), :style => "color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;")%></p>
+
+
+<div><%= link_to "LEER NOTA ENTERA",@post_inicio,:class => "link-azul" %></div>
 
 </div>
 

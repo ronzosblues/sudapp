@@ -9,7 +9,9 @@ class AdminController < ApplicationController
 	def dispatch_email
 	@newsletterbody = params[:mensaje]
 	@newslettertitle = params[:asunto]
-	UserMailer.newsletter(@newslettertitle,@newsletterbody).deliver
+	User.all.each do |usuario|
+	UserMailer.newsletter(@newslettertitle,@newsletterbody,usuario).deliver
+	end
 	redirect_to :controller => '/admin'
 	end
 
