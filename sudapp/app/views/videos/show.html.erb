@@ -1,0 +1,26 @@
+
+<%= link_to '→ Volver', videos_path %>
+<% if current_user.try(:admin?) %>
+| <%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>
+<% end %>
+<p></p>
+
+<% if @video.video_url.include? "youtube.com"
+@numero = @video.video_url.partition("=").last
+@video_code = '<iframe width="100%" height="500px" src="//www.youtube.com/embed/'+@numero+'" frameborder="0" allowfullscreen></iframe>'
+end %>
+
+<% if @video.video_url.include? "vimeo.com" 
+ @numero = @video.video_url.partition(".com/").last
+ @video_code = '<iframe width="100%" height="500px" src="//player.vimeo.com/video/'+@numero+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+ end %>
+<p>
+  <h1><%= @video.video_title %></h1>
+</p>
+
+<p>
+  <%= @video_code.html_safe %>
+</p>
+
+

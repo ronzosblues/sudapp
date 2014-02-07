@@ -1,0 +1,31 @@
+<h1>Listing comment_photos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Photo</th>
+      <th>User</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comment_photos.each do |comment_photo| %>
+      <tr>
+        <td><%= comment_photo.content %></td>
+        <td><%= comment_photo.photo %></td>
+        <td><%= comment_photo.user %></td>
+        <td><%= link_to 'Show', comment_photo %></td>
+        <td><%= link_to 'Edit', edit_comment_photo_path(comment_photo) %></td>
+        <td><%= link_to 'Destroy', comment_photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment photo', new_comment_photo_path %>

@@ -1,0 +1,17 @@
+<div class="fuente-dos">CONTACTO</div>
+<br>
+<p style="color:#A4A4A4">Envienos su mensaje, trataremos de responderlo en la brevedad.</p>
+
+<%= form_tag :controller => '/admin', :action => 'contact_email' do %>
+
+  <%= label_tag 'Asunto' %>
+  <%= text_field_tag 'asunto' %>
+
+  <%= label_tag 'Mensaje' %>
+  <%= text_area_tag 'mensaje' %>
+  <p></p>
+
+  <%= hidden_field :user, :value => current_user.try(:username) %>
+  <%= submit_tag "Enviar" %>
+
+<% end %>

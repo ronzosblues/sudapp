@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+ 
+
+ <h1> <%= @tipo_producto.nombre_tipo_producto %> </h1><% if current_user.try(:admin?) %> |
+<%= link_to 'Editar', edit_tipo_producto_path(@tipo_producto) %> |
+<%= link_to 'Volver', tipo_productos_path %> |
+<%= link_to 'Agregar', :controller => :productos, :action => :new %> |
+<% end %>
+
+
+  <ul class="small-block-grid-4 my-grid">
+ 
+   <% @productos.each do |producto| %>
+     <p></p> 
+        <% if producto.tipo_producto_id == @tipo_producto.id %>
+
+              <li><p style = "color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;"><%= producto.nombre_producto %><br>
+              	Talles: <%= producto.descripcion_producto %><br>
+              	Precio: $<%= producto.precio %><br>
+                </p>
+             
+              <div class="th"><%= link_to(producto){image_tag producto.foto_producto.url,:class => "galeria"} %></div>
+              <p></p>
+              <p>
+                <% if user_signed_in? %>
+                <%= form_for(@pedido) do |f| %>
+                <div class="actions">
+                <%= f.hidden_field :producto_id, :value => producto.id %>
+                <%= f.hidden_field :fecha, :value => Time.now %>
+                <%= f.hidden_field :user_id, :value => current_user.try(:id) %>
+                <%= f.submit "ordenar" %>
+                </div>
+                <%end%> 
+                <% end %>  
+                <hr>            
+              </p>
+      			  <% if current_user.try(:admin?) %>
+        			  <%= link_to 'Edit', edit_producto_path(producto) %> |
+        			  <%= link_to 'Eliminar', producto, method: :delete, data: { confirm: 'Esta seguro que desea eliminar el producto?'} %>
+      			  <% end %>
+               </li>
+        <% end %>
+   <% end %>
+ </ul>
+
+<%= link_to '→ Volver', tipo_productos_path %>
+</p>
+
+
+
+
+

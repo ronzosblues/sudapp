@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+    <p>
+  
+  <h1><%= @album.album_title %></h1>
+<%= link_to '→ Volver', albums_path %>
+<% if current_user.try(:admin?) %> |
+<%= link_to 'Edit', edit_album_path(@album) %> |
+<%= link_to 'Agregar Foto', :controller => :photos, :action => :new %> |
+<% end %>
+
+
+</p>
+
+ <ul class="small-block-grid-4 my-grid">
+ 
+   <% @photos.each do |photo| %>
+   <% @url = "background-image: url("+photo.photo.path+");"%>
+  
+        <% if photo.album_id == @album.id %>
+
+              <li>
+              <!--  <a class="th" href=<% photo.photo.path %> style=<% @url%>>
+          <img class="transparent" src=<% photo.photo.path %> />
+      </a>-->
+              <div class="th"><%=link_to (photo){image_tag photo.photo.url, :class => "galeria"}%></div>
+              <p></p>
+      			  <% if current_user.try(:admin?) %>
+        			  <%= link_to 'Editar', edit_photo_path(photo) %> |
+        			  <%= link_to 'Eliminar', photo, method: :delete, data: { confirm: 'Esta seguro que desea eliminar la foto?' } %>
+      			  <% end %>
+               </li>
+        <% end %>
+   <% end %>
+ </ul>
+
+
+</p>
+
+

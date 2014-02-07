@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 
+  producto_id: 
+  fecha: 2014-02-05
+
+two:
+  user_id: 
+  producto_id: 
+  fecha: 2014-02-05

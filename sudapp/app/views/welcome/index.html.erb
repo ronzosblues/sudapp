@@ -1,0 +1,49 @@
+<div class="row display">
+  <div class="large-12 columns"><span class="show-for-small"></span><span class="hide-for-small">
+
+<% if user_signed_in?%>
+<% else%>
+<% end %>
+
+<div class="row">
+
+<div class="large-12 columns">
+<!--<img src="/images/logo2.jpg" style="width:100%;" />-->
+
+ 
+
+<% if @post_inicio %>
+<p>
+<div><div class="fuente-tres" style="color:#61380B">NOTA DESTACADA</div></div>
+<h4><div class = "titulo"><%= @post_inicio.post_title.upcase %></div></h4>
+
+<% if @post_inicio.post_autor != "" %>
+<h6>Por : <%= @post_inicio.post_autor%></h6>
+<% end %>
+</p>
+<div>
+<p><%= image_tag @post_inicio.post_photo.url, :class => "th"%>
+</p>
+</div>
+<p><%= simple_format(truncate(@post_inicio.post_body, length: 600, omission: '...'), :style => "color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;")%></p>
+
+
+<div><%= link_to "LEER NOTA ENTERA",@post_inicio,:class => "link-azul" %></div>
+
+</div>
+
+<% end %>
+
+
+</div>
+
+<div class="large-12 columns">
+
+</div>
+
+
+
+
+
+   </div>
+    </div>

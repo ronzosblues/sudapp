@@ -1,0 +1,23 @@
+
+<div class="fuente-dos">FOTOS</div>
+<p></p>
+<% if current_user.try(:admin?)%> <%= link_to 'Agregar Album', new_album_path %> <% end %>
+<p></p>
+
+
+
+    <% @albums.each do |album| %>
+    
+    
+        <div class="my-div-bottom"><%= link_to album.album_title.upcase, album ,:class => "fuente-tres" %></div>
+        <% if current_user.try(:admin?)%>
+        |<td><%= link_to ' Editar', edit_album_path(album) %></td> |
+        <td><%= link_to ' Eliminar', album, method: :delete, data: { confirm: 'Are you sure?' } %></td> |
+        <% end %>
+        <p></p>
+    
+    <% end %>
+
+<br>
+
+
