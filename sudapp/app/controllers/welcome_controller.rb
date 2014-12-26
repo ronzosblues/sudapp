@@ -7,13 +7,8 @@ class WelcomeController < ApplicationController
 		end
 	end
 
+
 	def index
-	
-		Post.all.each do |post|
-		if post.inicio
-		@post_inicio = post 	
-		end 
-        end 
 	end
 
 end

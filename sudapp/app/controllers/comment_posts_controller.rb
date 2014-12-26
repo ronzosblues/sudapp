@@ -4,25 +4,25 @@ class CommentPostsController < ApplicationController
   # GET /comment_posts
   # GET /comment_posts.json
   def index
-    admin_check
+    inaccesible
     @comment_posts = CommentPost.all
   end
 
   # GET /comment_posts/1
   # GET /comment_posts/1.json
   def show
-    admin_check
+    inaccesible
     @comment_post = CommentPost.new
   end
 
   # GET /comment_posts/new
   def new
-    admin_check
     @comment_post = CommentPost.new
   end
 
   # GET /comment_posts/1/edit
   def edit
+    inaccesible
   end
 
   # POST /comment_posts
@@ -34,7 +34,7 @@ class CommentPostsController < ApplicationController
       if @comment_post.save
         @id = @comment_post.post.id.to_s
         @ruta = "/posts/"+@id
-        format.html { redirect_to @ruta, notice: 'Commentpost was successfully created.' }
+        format.html { redirect_to @ruta, notice: 'Ha comentado exitosamente.' }
         format.json { render action: 'show', status: :created, location: @comment_post }
       else
         format.html { render action: 'new' }

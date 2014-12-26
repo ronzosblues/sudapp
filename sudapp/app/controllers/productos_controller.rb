@@ -4,13 +4,14 @@ class ProductosController < ApplicationController
   # GET /productos
   # GET /productos.json
   def index
-    admin_check
+    inaccesible
     @productos = Producto.all
   end
 
   # GET /productos/1
   # GET /productos/1.json
   def show
+    indumentaria_permiso
   end
 
   # GET /productos/new
@@ -21,6 +22,7 @@ class ProductosController < ApplicationController
 
   # GET /productos/1/edit
   def edit
+    admin_check
   end
 
   # POST /productos
@@ -30,7 +32,7 @@ class ProductosController < ApplicationController
 
     respond_to do |format|
       if @producto.save
-        format.html { redirect_to @producto, notice: 'Producto was successfully created.' }
+        format.html { redirect_to @producto, notice: 'El producto fue creado exitosamente.' }
         format.json { render action: 'show', status: :created, location: @producto }
       else
         format.html { render action: 'new' }
@@ -44,7 +46,7 @@ class ProductosController < ApplicationController
   def update
     respond_to do |format|
       if @producto.update(producto_params)
-        format.html { redirect_to @producto, notice: 'Producto was successfully updated.' }
+        format.html { redirect_to @producto, notice: 'El producto fue editado exitosamente.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -58,7 +60,7 @@ class ProductosController < ApplicationController
   def destroy
     @producto.destroy
     respond_to do |format|
-      format.html { redirect_to productos_url }
+      format.html { redirect_to :controller => "/tipo_productos", :action => "show", :id => @producto.tipo_producto.id }
       format.json { head :no_content }
     end
   end
@@ -71,6 +73,6 @@ class ProductosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
-      params.require(:producto).permit(:nombre_producto, :descripcion_producto, :foto_producto, :tipo_producto_id, :precio)
+      params.require(:producto).permit(:nombre_producto, :talles_producto, :foto_producto, :tipo_producto_id, :precio)
     end
 end

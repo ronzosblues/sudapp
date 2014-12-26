@@ -4,12 +4,14 @@ class TipoProductosController < ApplicationController
   # GET /tipo_productos
   # GET /tipo_productos.json
   def index
+    indumentaria_permiso
     @tipo_productos = TipoProducto.all
   end
 
   # GET /tipo_productos/1
   # GET /tipo_productos/1.json
   def show
+    indumentaria_permiso
     @productos = Producto.all
     @pedido = Pedido.new
   end
@@ -22,6 +24,7 @@ class TipoProductosController < ApplicationController
 
   # GET /tipo_productos/1/edit
   def edit
+    admin_check
   end
 
   # POST /tipo_productos
@@ -31,7 +34,7 @@ class TipoProductosController < ApplicationController
 
     respond_to do |format|
       if @tipo_producto.save
-        format.html { redirect_to @tipo_producto, notice: 'Tipo producto was successfully created.' }
+        format.html { redirect_to @tipo_producto, notice: 'La categoria de producto fue creada exitosamente.' }
         format.json { render action: 'show', status: :created, location: @tipo_producto }
       else
         format.html { render action: 'new' }
@@ -45,7 +48,7 @@ class TipoProductosController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_producto.update(tipo_producto_params)
-        format.html { redirect_to @tipo_producto, notice: 'Tipo producto was successfully updated.' }
+        format.html { redirect_to @tipo_producto, notice: 'La categoria de producto fue creada exitosamente' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -59,7 +62,7 @@ class TipoProductosController < ApplicationController
   def destroy
     @tipo_producto.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_productos_url }
+      format.html { redirect_to :controller => "/tipo_productos", :action => "index"}
       format.json { head :no_content }
     end
   end

@@ -1,49 +1,127 @@
-<div class="row display">
-  <div class="large-12 columns"><span class="show-for-small"></span><span class="hide-for-small">
 
-<% if user_signed_in?%>
-<% else%>
+
+
+
+ <% Post.all.each do |post|%>
+
+  <% if post.try(:inicio)%>
+   <% @post_inicio = post %>	
+    <% if @post_inicio %>
+
+         
+         
+
+<div style="background-color:#151515; padding: 15px; width:100%;">
+  <div class="fuente-tres" style ="color:#866A6A;">NOTA DESTACADA : <%= @post_inicio.post_title.upcase %></div></div>
+  <!--<div style="width:100%;font-family: 'Anton', serif;font-size: 200%;color:#49aec3"><%= @post_inicio.post_title.upcase %></div>
+<div class="fuente-tres" style ="color:#866A6A;">NOTA DESTACADA</div></div>-->
+     <div style="border:4px;border-color:#FFFFFF"><%= image_tag @post_inicio.post_photo.url, :style => "border: solid 5x #151515; " %></div>
+
+<% if @post_inicio.post_photographer.nil? %>
+<% else %>
+<% if @post_inicio.post_photographer.gsub(/\s+/, "").empty?   %>
+<% else %>
+<div style="background-color:#151515; padding: 10px 10px 10px 15px"><div class="fuente-tres" style ="color:#866A6A;">FOTO : <%= @post_inicio.post_photographer.upcase%></div></div>
+
+<% end %>
 <% end %>
 
-<div class="row">
-
-<div class="large-12 columns">
-<!--<img src="/images/logo2.jpg" style="width:100%;" />-->
-
+ <ul class="small-block-grid-3 my-grid">
  
+   <% PhotoPost.all.each do |photo| %>
+   <% @url = "background-image: url("+photo.photo.path+");"%>
+        <% if photo.post_id == @post_inicio.id %>
+              <li>
+              <div ><%=link_to (photo_post_path(:id => photo.id, :allphotos => 0)){image_tag photo.photo.url, :class => "galeria"}%></div>
 
-<% if @post_inicio %>
-<p>
-<div><div class="fuente-tres" style="color:#61380B">NOTA DESTACADA</div></div>
-<h4><div class = "titulo"><%= @post_inicio.post_title.upcase %></div></h4>
+               </li>
+        <% end %>
+   <% end %>
+ </ul>
 
-<% if @post_inicio.post_autor != "" %>
-<h6>Por : <%= @post_inicio.post_autor%></h6>
+<br>
+
+<div class = "secciones" style = "font-size:200%"><%= @post_inicio.post_title.upcase %></div>
+
+<% if @post_inicio.post_autor.nil? %>
+<% else %>
+<% if @post_inicio.post_autor.gsub(/\s+/, "").empty? %>
+<% else %>
+<div class="fuente-tres" style = "color:#866A6A;">NOTA : <%= @post_inicio.post_autor.upcase %></div>
 <% end %>
-</p>
-<div>
-<p><%= image_tag @post_inicio.post_photo.url, :class => "th"%>
-</p>
-</div>
-<p><%= simple_format(truncate(@post_inicio.post_body, length: 600, omission: '...'), :style => "color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;")%></p>
+<% end %>
+     <p><%= simple_format(truncate(@post_inicio.post_body, length: 700, omission: '...'), :style => "color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;")%></p>
+     <div><%= link_to "→ LEER NOTA ENTERA",post_path(:id => post.id, :allposts => 0),:class => "link-azul" %></div>
 
+    <% 
+    @tienevideo
+    Post.all.each do |post| 
+         VideoPost.all.each do |video| 
+             if video.post == post 
+                  @tienevideo = 1 
+                     break 
+             else 
+                  @tienevideo = 0 
+             end 
+         end 
+         end
+         %>
 
-<div><%= link_to "LEER NOTA ENTERA",@post_inicio,:class => "link-azul" %></div>
+<% if @tienevideo == 1 %> 
+    <br>
 
-</div>
-
+  <hr>
+    <div class = "secciones">V I D E O S &nbsp N O T A :</div>
 <% end %>
 
+ <ul class="small-block-grid-1 my-grid">
 
-</div>
+ <%
+        VideoPost.all.each do |video|
+        if video.post_id == @post_inicio.id %>
+        <% @video = video %>
+      <p></p>
+      
+        <% if @video.video_post_url.include? "youtube.com"
+        @numero = @video.video_post_url.partition("=").last
+        @video_code = '<iframe width=100% height=400px src="//www.youtube.com/embed/'+@numero+'" frameborder="0" allowfullscreen></iframe>'
+        end %>
+        <% if @video.video_post_url.include? "vimeo.com" 
+         @numero = @video.video_post_url.partition(".com/").last
+         @video_code = '<iframe width=100% height=400px  src="//player.vimeo.com/video/'+@numero+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+        end %>
+        <li><div class = "secciones" style = "font-size:200%"><%= link_to video.video_post_title.upcase, video, :video_id => video.id %></div></li>
+        <li><%= @video_code.html_safe %></li>
+      <% end %>
+    <% end%>
+</ul>  
 
-<div class="large-12 columns">
+   <% end %>
+  <% end %>
+  
+<%  end %>
 
-</div>
+<!--
+<br>
+<hr>
+<br>
+<ul>
+       <li><div class="fuente-dos" style = "color:#866A6A;">ULTIMAS NOTAS</div></li>
+    <br>
+       <% Post.find(:all, :order => "id desc", :limit => 4).reverse.each do |post| %>
+       <li><h4><div><%= link_to post.post_title.upcase,post,:class => "titulo2" %></div></h4></li>
+       <% end %>
+         <br>
+        <li><div><%= link_to "→ VER TODAS",{:controller => "/posts"},:class => "fuente-tres" %></div></li>
+        <p></p>
+
+</ul>
+        <br>
+<hr>
+<br>
+-->
 
 
 
 
 
-   </div>
-    </div>

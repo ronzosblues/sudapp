@@ -1,16 +1,15 @@
-<p id="notice"><%= notice %></p>
 
-    <p>
+
   
-  <h1><%= @album.album_title %></h1>
-<%= link_to '→ Volver', albums_path %>
+  <div class = "secciones" style = "font-size:200%"><%= @album.album_title.upcase %></div><br>
 <% if current_user.try(:admin?) %> |
-<%= link_to 'Edit', edit_album_path(@album) %> |
-<%= link_to 'Agregar Foto', :controller => :photos, :action => :new %> |
+<%= link_to 'Editar', edit_album_path(@album) %> |
+<%= link_to 'Agregar Foto', :controller => :photos, :action => :new, :album_id => @album.id %> |
+<br>
 <% end %>
 
 
-</p>
+<br>
 
  <ul class="small-block-grid-4 my-grid">
  
@@ -23,7 +22,7 @@
               <!--  <a class="th" href=<% photo.photo.path %> style=<% @url%>>
           <img class="transparent" src=<% photo.photo.path %> />
       </a>-->
-              <div class="th"><%=link_to (photo){image_tag photo.photo.url, :class => "galeria"}%></div>
+              <div ><%=link_to (photo_path(:id => photo.id, :allphotos => 0)){image_tag photo.photo.url, :class => "galeria"}%></div>
               <p></p>
       			  <% if current_user.try(:admin?) %>
         			  <%= link_to 'Editar', edit_photo_path(photo) %> |
@@ -37,4 +36,4 @@
 
 </p>
 
-
+<%= link_to '→ Volver', albums_path %>

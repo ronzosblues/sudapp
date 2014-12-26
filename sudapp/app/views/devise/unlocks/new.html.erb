@@ -1,12 +1,12 @@
-<h2>Resend unlock instructions</h2>
-
+<div class="secciones">V O L V E R &nbsp A &nbsp E N V I A R &nbsp L A S &nbsp I N S T R U C C I O N E S &nbsp D E &nbsp A C T I V A C I O N</div>
+<br>
 <%= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
+  <div><%= f.label "Email" %><br />
   <%= f.email_field :email, :autofocus => true %></div>
 
-  <div><%= f.submit "Resend unlock instructions" %></div>
+  <div><%= f.submit "Volver a enviar las instrucciones de activacion" %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>

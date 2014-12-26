@@ -1,0 +1,17 @@
+ <% @label = params[:label] %>
+
+<% if @label.start_with?('header')%>
+<h1 style = "color:#B28D8D;">Crear header</h1>
+<% end %>
+
+<% if@label.start_with?('banner')%>
+<h1 style = "color:#B28D8D;">Crear banner</h1>
+<% end %>
+
+<% if @label.start_with?('footer')%>
+<h1 style = "color:#B28D8D;">Crear footer</h1>
+<% end %>
+
+<%= render 'form' %>
+
+<%= link_to '→ Volver al administrador', :controller => "/admin" %>

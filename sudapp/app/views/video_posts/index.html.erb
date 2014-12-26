@@ -1,0 +1,13 @@
+<h1 style = "color:#B28D8D;">Videos/Notas</h1>
+
+    <% @video_posts.each do |video_post| %> 
+        <%= video_post.video_post_title %>
+        <%= video_post.video_post_url %>
+        <%= video_post.post.post_title %>
+      <br>
+    <% end %>
+
+
+<br>
+
+

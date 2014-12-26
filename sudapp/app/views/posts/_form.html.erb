@@ -12,23 +12,32 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :post_title %><br>
+    <%= f.label "Titulo" %>
     <%= f.text_field :post_title %>
   </div>
    <div class="field">
-    <%= f.label :post_autor %><br>
+    <%= f.label "Autor" %>
     <%= f.text_field :post_autor %>
   </div>
+
     <div class="field">
-    <%= f.label :post_photo %><br>
+    <%= f.label "Foto Principal" %>
     <%= f.file_field :post_photo %>
   </div>
+
+   <div class="field">
+    <%= f.label "Foto sacada por:" %>
+    <%= f.text_field :post_photographer %>
+  </div>
+
+
   <div class="field">
-    <%= f.label :post_body %><br>
-    <pre><%= f.text_area :post_body %></pre>
+    <%= f.label "Contenido" %>
+    <%= f.text_area :post_body %>
+
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enviar" %>
   </div>
 <% end %>

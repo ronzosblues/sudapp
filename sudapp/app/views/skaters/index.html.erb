@@ -1,4 +1,4 @@
-<div class="fuente-dos">SKATERS</div>
+<div class="secciones">S K A T E R S</div>
 <p></p>
 <%if current_user.try(:admin?) %>
   <%= link_to 'Crear un nuevo perfil', new_skater_path %>
@@ -11,6 +11,8 @@
         <%if current_user.try(:admin?) %>
         |<%= link_to ' Editar', edit_skater_path(skater) %> |
         <%= link_to ' Eliminar', skater, method: :delete, data: { confirm: 'Esta seguro que desea eliminar este perfil?' } %> |
+        <%= link_to 'Agregar fotos al perfil', :controller => '/photo_skaters', :action => 'new', :skater_id => skater.id, :skater_name => skater.skater_name %> |
+        <%= link_to 'Agregar video a la nota', :controller => '/video_skaters', :action => 'new', :skater_id => skater.id, :skater_name => skater.skater_name %> |
         <% end %>
         <p></p>
     <% end %>

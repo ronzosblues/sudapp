@@ -1,3 +1,4 @@
+<% @tipo_producto_id = params[:tipo_producto_id].to_i %>
 <%= form_for(@producto) do |f| %>
   <% if @producto.errors.any? %>
     <div id="error_explanation">
@@ -12,26 +13,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :nombre_producto %><br>
+    <%= f.label "Nombre" %>
     <%= f.text_field :nombre_producto %>
   </div>
   <div class="field">
-    <%= f.label :descripcion_producto %><br>
-    <%= f.text_area :descripcion_producto %>
+    <%= f.label "Talles" %>
+    <%= f.text_field :talles_producto %>
   </div>
   <div class="field">
-    <%= f.label :foto_producto %><br>
+    <%= f.label "Foto" %>
     <%= f.file_field :foto_producto %>
   </div>
   <div class="field">
-    <%= f.label :tipo_producto %><br>
-    <%= f.collection_select :tipo_producto_id, TipoProducto.all, :id, :nombre_tipo_producto %>
+    <%= f.label :tipo_producto %>
+    <%= f.collection_select :tipo_producto_id, TipoProducto.all, :id, :nombre_tipo_producto, {:selected => @tipo_producto_id} %>
   </div>
   <div class="field">
-    <%= f.label :precio %><br>
+    <%= f.label "Precio" %>
     <%= f.number_field :precio %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enviar" %>
   </div>
 <% end %>

@@ -4,7 +4,7 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    admin_check
+    inaccesible
     @photos = Photo.all
   end
 
@@ -12,7 +12,21 @@ class PhotosController < ApplicationController
   # GET /photos/1.json
   def show
     @comment_photo = CommentPhoto.new
-    @comments = CommentPhoto.find(:all,:limit => 10)
+    @allphotos = params[:allphotos].to_i
+
+    if @allphotos == 0
+      @comments = CommentPhoto.all.last(7).sort { |a,b| b.created_at <=> a.created_at }
+    else
+      @comments = CommentPhoto.find(:all).sort { |a,b| b.created_at <=> a.created_at }
+    end
+
+
+    
+
+
+
+
+
   end
 
   # GET /photos/new
@@ -23,6 +37,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/1/edit
   def edit
+    admin_check
   end
 
   # POST /photos
@@ -32,7 +47,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
+        format.html { redirect_to @photo, notice: 'La foto fue creada exitosamente.' }
         format.json { render action: 'show', status: :created, location: @photo }
       else
         format.html { render action: 'new' }
@@ -46,7 +61,7 @@ class PhotosController < ApplicationController
   def update
     respond_to do |format|
       if @photo.update(photo_params)
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
+        format.html { redirect_to @photo, notice: 'La foto fue editada exitosamente.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -60,7 +75,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo.destroy
     respond_to do |format|
-      format.html { redirect_to photos_url }
+      format.html { redirect_to :controller => "/albums", :action => "show", :id => @photo.album.id }
       format.json { head :no_content }
     end
   end

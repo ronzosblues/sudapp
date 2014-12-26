@@ -1,17 +1,35 @@
+<div class="large-12 columns">
 <div class="large-6 columns">
-<h1>Administrador</h1>
+<h1 style = "color:#B28D8D;">Administrador</h1>
 <p></p>
-<div class="my-div-bottom-green"><%= link_to 'Crear album', new_album_path, :class => "fuente-tres" %><p></p>
-<div class="my-div-bottom-green"><%= link_to 'Agregar una nueva foto', new_photo_path, :class => "fuente-tres" %></div><p></p>
-<div class="my-div-bottom-green"><%= link_to 'Crear una nueva noticia', new_post_path, :class => "fuente-tres" %></div><p></p>
-<div class="my-div-bottom-green"><%= link_to 'Crear un nuevo perfil', new_skater_path, :class => "fuente-tres" %></div><p></p>
-<div class="my-div-bottom-green"><%= link_to 'Crear nueva categoria de producto', new_tipo_producto_path, :class => "fuente-tres" %></div><p></p>
-<div class="my-div-bottom-green"><%= link_to 'Agregar un nuevo producto', new_producto_path, :class => "fuente-tres" %></div><p></p>
-<div class="my-div-bottom-green"><%= link_to 'Enviar mail a los usuarios', {:controller=>'/admin', :action=>'newsletterform'}, :class => "fuente-tres" %></div><p></p>
-<%= link_to 'Revisar pedidos', pedidos_path, :class => "fuente-tres" %></div><p></p>
+<div class="my-div-bottom-dark"><%= link_to 'Crear una nueva nota', new_post_path, :class => "fuente-tres" %></div></br>
+<div class="my-div-bottom-dark"><%= link_to 'Crear album', new_album_path, :class => "fuente-tres" %></div></br>
+<div class="my-div-bottom-dark"><%= link_to 'Agregar una nueva foto', new_photo_path, :class => "fuente-tres" %></div></br>
+<div class="my-div-bottom-dark"><%= link_to 'Agregar un nuevo video', new_video_path, :class => "fuente-tres" %></div></br>
+<div class="my-div-bottom-dark"><%= link_to 'Crear un nuevo perfil', new_skater_path, :class => "fuente-tres" %></div></br>
+<div class="my-div-bottom-dark"><%= link_to 'Agregar amigo', new_amigo_path, :class => "fuente-tres" %></div></br>
+<div class="my-div-bottom-dark"><%= link_to 'Crear nueva categoria de producto', new_tipo_producto_path, :class => "fuente-tres" %></div></br>
+<div class="my-div-bottom-dark"><%= link_to 'Agregar un nuevo producto', new_producto_path, :class => "fuente-tres" %></div></br>
+<div class="my-div-bottom-dark"><%= link_to 'Enviar mail a los usuarios', {:controller=>'/admin', :action=>'newsletterform'}, :class => "fuente-tres" %></div></br>
+<div class="my-div-bottom-dark"><%= link_to 'Revisar pedidos', pedidos_path, :class => "fuente-tres" %></div></br>
+
+
+
+<% if ActivacionIndumentaria.first.activacion == false %>
+<div class="my-div-bottom-dark"><%= link_to 'Activar indumentraria', :controller => '/admin', :action => 'activar_indumentaria', :class => "fuente-tres" %></div></br>
+<% else %>
+<div class="my-div-bottom-dark"><%= link_to 'Desactivar indumentraria', :controller => '/admin', :action => 'desactivar_indumentaria', :class => "fuente-tres" %></div></br>
+<% end %>
+
+
+
+
+<hr style="color:transparent; background-color:transparent">
+
 </div>
 <div class="large-6 columns">
 	<!--<img src="/images/rana.gif" style="width:100%;"  />-->
 </div>
 
 
+</div>

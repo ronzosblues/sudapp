@@ -1,19 +1,20 @@
 
-<div class="fuente-dos">NOTAS</div>
+<div class="secciones">N O T A S</div>
 <p></p>
 <!--<p><div class="fuente-cuatro"><strong>NOTAS</strong></div></p>-->
 <% if current_user.try(:admin?)%>
-<%= link_to 'Agregar una nueva noticia', new_post_path %>
+<%= link_to 'Agregar una nueva nota', new_post_path %>
 <% end %>
 <p></p>
     <% @posts.each do |post| %>
      
-        
-        <div class="my-div-bottom"><%= link_to post.post_title.upcase,post, :allpost => 0 ,:class => "fuente-tres" %></div>
+        <div class="my-div-bottom"><%= link_to post.post_title.upcase,post_path(:id => post.id, :allposts => 0),:class => "fuente-tres" %></div>
         <% if current_user.try(:admin?)%>
         |<%= link_to ' Editar', edit_post_path(post) %> |
         <%= link_to ' Eliminar', post, method: :delete, data: { confirm: 'Esta seguro que desea eliminar la noticia?' } %></td> |
         <%= link_to 'Asignar al inicio', :controller => '/posts', :action => 'inicio', :id => post.id %> |
+		<%= link_to 'Agregar fotos a la nota', :controller => '/photo_posts', :action => 'new', :post_id => post.id, :post_title => post.post_title %> |
+		<%= link_to 'Agregar video a la nota', :controller => '/video_posts', :action => 'new', :post_id => post.id, :post_title => post.post_title %> |
 
    
       <% end %><p></p>

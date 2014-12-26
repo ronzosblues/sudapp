@@ -4,26 +4,26 @@ class CommentPhotosController < ApplicationController
   # GET /comment_photos
   # GET /comment_photos.json
   def index
-    admin_check
+    
     @comment_photos = CommentPhoto.all
   end
 
   # GET /comment_photos/1
   # GET /comment_photos/1.json
   def show
-    admin_check
+    inaccesible
     @comment_photo = CommentPhoto.new
   end
 
 
   # GET /comment_photos/new
   def new
-    admin_check
     @comment_photo = CommentPhoto.new
   end
 
   # GET /comment_photos/1/edit
   def edit
+    inaccesible
   end
 
   # POST /comment_photos
@@ -35,7 +35,7 @@ class CommentPhotosController < ApplicationController
       if @comment_photo.save
         @id = @comment_photo.photo.id.to_s
         @ruta = "/photos/"+@id
-        format.html { redirect_to @ruta, notice: 'Commentphoto was successfully created.' }
+        format.html { redirect_to @ruta, notice: 'Ha comentado exitosamente.' }
         format.json { render action: 'show', status: :created, location: @comment_photo }
       else
         format.html { render action: 'new' }

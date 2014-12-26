@@ -21,6 +21,7 @@ class AlbumsController < ApplicationController
 
   # GET /albums/1/edit
   def edit
+    admin_check
   end
 
   # POST /albums
@@ -30,7 +31,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.save
-        format.html { redirect_to @album, notice: 'Album was successfully created.' }
+        format.html { redirect_to @album, notice: 'El album fue creado exitosamente.' }
         format.json { render action: 'show', status: :created, location: @album }
       else
         format.html { render action: 'new' }
@@ -44,7 +45,7 @@ class AlbumsController < ApplicationController
   def update
     respond_to do |format|
       if @album.update(album_params)
-        format.html { redirect_to @album, notice: 'Album was successfully updated.' }
+        format.html { redirect_to @album, notice: 'El album fue editado exitosamente.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -58,7 +59,7 @@ class AlbumsController < ApplicationController
   def destroy
     @album.destroy
     respond_to do |format|
-      format.html { redirect_to albums_url }
+      format.html { redirect_to :controller => "/albums", :action => "index" }
       format.json { head :no_content }
     end
   end

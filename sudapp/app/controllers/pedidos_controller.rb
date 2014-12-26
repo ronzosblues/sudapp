@@ -1,6 +1,9 @@
 class PedidosController < ApplicationController
   before_action :set_pedido, only: [:show, :edit, :update, :destroy]
 
+  def pedidos_user
+  end
+
   # GET /pedidos
   # GET /pedidos.json
   def index
@@ -11,17 +14,17 @@ class PedidosController < ApplicationController
   # GET /pedidos/1
   # GET /pedidos/1.json
   def show
-    admin_check
+    inaccesible
   end
 
   # GET /pedidos/new
   def new
-    admin_check
     @pedido = Pedido.new
   end
 
   # GET /pedidos/1/edit
   def edit
+    inaccesible
   end
 
   # POST /pedidos
@@ -31,7 +34,7 @@ class PedidosController < ApplicationController
 
     respond_to do |format|
       if @pedido.save
-        format.html { redirect_to @pedido, notice: 'Pedido was successfully created.' }
+        format.html { redirect_to :controller => "/pedidos", :action => "pedidos_user", notice: 'Su pedido fue realizado exitosamente.' }
         format.json { render action: 'show', status: :created, location: @pedido }
       else
         format.html { render action: 'new' }
@@ -45,7 +48,7 @@ class PedidosController < ApplicationController
   def update
     respond_to do |format|
       if @pedido.update(pedido_params)
-        format.html { redirect_to @pedido, notice: 'Pedido was successfully updated.' }
+        format.html { redirect_to :controller => "/pedidos", :action => "pedidos_user", notice: 'Pedido was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -59,8 +62,14 @@ class PedidosController < ApplicationController
   def destroy
     @pedido.destroy
     respond_to do |format|
-      format.html { redirect_to pedidos_url }
+      if current_user.try(:admin)
+      format.html { redirect_to :controller => "/pedidos", :action => "index"}
       format.json { head :no_content }
+       else
+        format.html { redirect_to :controller => "/pedidos", :action => "pedidos_user"}
+      format.json { head :no_content }
+       end
+
     end
   end
 

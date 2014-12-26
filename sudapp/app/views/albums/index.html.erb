@@ -1,5 +1,5 @@
 
-<div class="fuente-dos">FOTOS</div>
+<div class="secciones">F O T O S</div>
 <p></p>
 <% if current_user.try(:admin?)%> <%= link_to 'Agregar Album', new_album_path %> <% end %>
 <p></p>
@@ -11,8 +11,8 @@
     
         <div class="my-div-bottom"><%= link_to album.album_title.upcase, album ,:class => "fuente-tres" %></div>
         <% if current_user.try(:admin?)%>
-        |<td><%= link_to ' Editar', edit_album_path(album) %></td> |
-        <td><%= link_to ' Eliminar', album, method: :delete, data: { confirm: 'Are you sure?' } %></td> |
+        |<%= link_to ' Editar', edit_album_path(album) %> |
+        <%= link_to ' Eliminar', album, method: :delete, data: { confirm: 'Esta seguro que quiere eliminar el album?' } %> |
         <% end %>
         <p></p>
     

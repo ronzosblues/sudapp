@@ -1,0 +1,30 @@
+
+<% @post_id = params[:post_id].to_i
+@post_title = params[:post_title]
+%>
+<%= form_for(@photo_post) do |f| %>
+  <% if @photo_post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@photo_post.errors.count, "error") %> prohibited this photo_post from being saved:</h2>
+
+      <ul>
+      <% @photo_post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Foto" %>
+    <%= f.file_field :photo %>
+  </div>
+
+  <div>
+    <%= f.hidden_field :post_id, :value => @post_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'enviar' %>
+  </div>
+<% end %>

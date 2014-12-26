@@ -7,7 +7,7 @@
     <% @productos.each do |producto| %>
       <tr>
         <td><%= producto.nombre_producto %></td>
-        <td><%= producto.descripcion_producto %></td>
+        <td><%= producto.talles_producto %></td>
         <td><%= producto.tipo_producto.nombre_tipo_producto %></td>
         <td><%= producto.precio %></td>
         <td><%= link_to 'Show', producto %></td>

@@ -1,7 +1,42 @@
 Appl::Application.routes.draw do
 
 
-  resources :pedidos
+  resources :images
+
+  resources :amigos
+
+  resources :video_skaters
+
+  resources :photo_skaters do
+    collection do
+      get :new
+    end
+  end
+
+  resources :photo_skaters do
+    collection do
+      get :new
+    end
+  end
+
+  resources :video_posts do
+    collection do
+      get :new
+    end
+  end
+
+  resources :photo_posts do
+    collection do
+      get :new
+    end
+  end
+
+
+  resources :pedidos do
+    collection do
+      get :pedidos_user
+    end
+  end
 
   resources :videos do
     collection do
@@ -37,7 +72,15 @@ Appl::Application.routes.draw do
 
   resources :admin do
     collection do
+      get :banner
+      get :header
+      get :footer
+      get :activar_indumentaria
+      get :desactivar_indumentaria
+      get :crear_valor_indumentaria
+      get :creare
       get :newsletterform
+      post :contact_email_signed_in
       post :contact_email
     end
   end

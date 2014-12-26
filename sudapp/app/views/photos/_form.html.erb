@@ -1,3 +1,4 @@
+<% @album_id = params[:album_id].to_i %>
 <%= form_for @photo, :html => { :multipart => true } do |f| %>
   <% if @photo.errors.any? %>
     <div id="error_explanation">
@@ -12,19 +13,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :photo_title %><br>
+    <%= f.label "Titulo" %>
     <%= f.text_field :photo_title%>
   </div>
+ 
   <div class="field">
-    <%= f.label :album_id %><br>
-    <%= f.collection_select :album_id, Album.all, :id, :album_title %>
+    <%= f.label :album_id %>
+    <%= f.collection_select :album_id, Album.all, :id, :album_title, {:selected => @album_id} %>
   </div>
+<br>
     <div class="field">
-    <%= f.file_field :photo, :class => 'input' %><br>
+    <%= f.file_field :photo, :class => 'input' %>
   </div>
 
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enviar"%>
   </div>
 <% end %>

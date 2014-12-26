@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140207183401) do
+ActiveRecord::Schema.define(version: 20140319191222) do
+
+  create_table "activacion_indumentaria", force: true do |t|
+    t.boolean  "activacion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "albums", force: true do |t|
     t.string   "album_title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "amigos", force: true do |t|
+    t.string   "name"
+    t.string   "web"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -41,6 +54,16 @@ ActiveRecord::Schema.define(version: 20140207183401) do
   add_index "comment_posts", ["post_id"], name: "index_comment_posts_on_post_id"
   add_index "comment_posts", ["user_id"], name: "index_comment_posts_on_user_id"
 
+  create_table "images", force: true do |t|
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "label"
+  end
+
   create_table "pedidos", force: true do |t|
     t.integer  "user_id"
     t.integer  "producto_id"
@@ -51,6 +74,30 @@ ActiveRecord::Schema.define(version: 20140207183401) do
 
   add_index "pedidos", ["producto_id"], name: "index_pedidos_on_producto_id"
   add_index "pedidos", ["user_id"], name: "index_pedidos_on_user_id"
+
+  create_table "photo_posts", force: true do |t|
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "photo_posts", ["post_id"], name: "index_photo_posts_on_post_id"
+
+  create_table "photo_skaters", force: true do |t|
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer  "skater_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "photo_skaters", ["skater_id"], name: "index_photo_skaters_on_skater_id"
 
   create_table "photos", force: true do |t|
     t.integer  "album_id"
@@ -76,11 +123,12 @@ ActiveRecord::Schema.define(version: 20140207183401) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "inicio"
+    t.string   "post_photographer"
   end
 
   create_table "productos", force: true do |t|
     t.string   "nombre_producto"
-    t.text     "descripcion_producto"
+    t.text     "talles_producto"
     t.string   "foto_producto_file_name"
     t.string   "foto_producto_content_type"
     t.integer  "foto_producto_file_size"
@@ -133,6 +181,26 @@ ActiveRecord::Schema.define(version: 20140207183401) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "video_posts", force: true do |t|
+    t.string   "video_post_title"
+    t.string   "video_post_url"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "video_posts", ["post_id"], name: "index_video_posts_on_post_id"
+
+  create_table "video_skaters", force: true do |t|
+    t.string   "video_skater_title"
+    t.string   "video_skater_url"
+    t.integer  "skater_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "video_skaters", ["skater_id"], name: "index_video_skaters_on_skater_id"
 
   create_table "videos", force: true do |t|
     t.string   "video_title"

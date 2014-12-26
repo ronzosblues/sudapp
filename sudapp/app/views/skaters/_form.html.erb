@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label "nombre" %><br>
+    <%= f.label "Nombre completo" %>
     <%= f.text_field :skater_name %>
   </div>
   <div class="field">
-    <%= f.label "ficha" %><br>
+    <%= f.label "Ficha" %>
     <%= f.text_area :skater_body %>
   </div>
   <div class="field">
-    <%= f.label "foto" %><br>
+    <%= f.label "Foto" %>
     <%= f.file_field :skater_photo %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enviar" %>
   </div>
 <% end %>

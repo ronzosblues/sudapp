@@ -1,18 +1,18 @@
-<h2>Entrar</h2>
-<p></p>
+<div class="secciones">E N T R A R</div>
+<br>
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
-  <div><%= f.label 'Usuario' %>
-  <%= f.text_field :username, :autofocus => true %></div>
+  <div><%= f.label 'Email' %>
+  <%= f.email_field :email, :autofocus => true %></div>
 
-  <div><%= f.label :password %>
+  <div><%= f.label "Contraseña" %>
   <%= f.password_field :password %></div>
 
   <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label "recuerdame" %></div>
+    <div><%= f.check_box :remember_me %> <%= f.label "no cerrar sesion", :class => "fuente-tres" %></div>
   <% end -%>
 
-  <div><%= f.submit "enviar" %></div>
+  <div><%= f.submit "Enviar" %></div>
 <% end %>
 <p></p>
 <%= render "devise/shared/links" %>

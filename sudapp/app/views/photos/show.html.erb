@@ -1,41 +1,79 @@
-<p id="notice"><%= notice %></p>
+<% if current_user.try(:admin?)%>
+|<%= link_to ' Editar', edit_photo_path(@photo) %> |
+<%= link_to ' Eliminar ',@photo, method: :delete, data: { confirm: 'Esta seguro que desea eliminar la foto?' } %> |
+<% end %><p></p>
 
-<p>
-  <%= @photo.photo_title %>
-
-| <%= link_to '→ Volver', :controller => "/albums", :action => "show", :id => @photo.album.id%> |
-</p>
+<p><div class = "secciones" style = "font-size:200%"><%= @photo.photo_title.upcase %></div></p>
 
 
- <div><%= image_tag @photo.photo.url,:class => "th"%></div> 
+ <div><%= image_tag @photo.photo.url%></div> 
   <p></p>
 
+<%= link_to '→ Volver', :controller => "/albums", :action => "show", :id => @photo.album.id%>
+<p></p>
 
-<% @comments.each do |comment| -%>
-  <% if comment.photo_id==@photo.id %>
-      <p><strong><%= comment.user.username%></strong> <%= simple_format(comment.content)%></p>
-        <% if current_user.try(:admin?) %>
-          <p><%= link_to 'Eliminar', comment, method: :delete, data: { confirm: 'Esta seguro que desea eliminar el comentario?' } %></p>
-        <% end %> 
-  <% end %> 
-<% end %>
 
 <% if user_signed_in? %>
 <%= form_for @comment_photo do |f| %>
   <div class="field">
-    <p><%= f.label 'comentario' %></p>
-    <%= f.text_area :content %>
+    <%= f.label "DEJA TU COMENTARIO" ,:class => "fuente-tres" %>
+    <%= f.text_area :content ,:class => "back-text-area-field" %>
     <%= f.hidden_field :photo_id, :value => @photo.id %>
     <%= f.hidden_field :user_id, :value => current_user.try(:id) %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Comentar"  %>
+    <%= f.submit " Comentar " %>
   </div>
-
+  
+  <% end %>
+  <% else %>
+  <div class="para-comentar">P A R A &nbsp P O D E R &nbsp C O M E N T A R &nbsp D E B E S &nbsp I N I C I A R &nbsp S E S I O N .</div><br>
   <% end %>
 
-    <% else %>
-  <p></p>
-  Para comentar debe ser un usuario registrado.
-  <% end %>
+
+    <% 
+
+    @tienecomentario
+    Photo.all.each do |photo| 
+         CommentPhoto.all.each do |comentario| 
+             if comentario.photo == photo 
+                  @tienecomentario = 1 
+                     break 
+             else 
+                  @tienecomentario = 0 
+             end 
+         end 
+         end
+         %>
+
+<% if @tienecomentario == 1 %> 
+<br>
+<% if @allphotos == 1 %>
+<p><div class = "secciones" style = "font-size:200%">COMENTARIOS:</div></p>
+<% else %>
+<p><div class = "secciones" style = "font-size:200%">ULTIMOS COMENTARIOS:</div></p>
+<% end %>
+<hr>
+<% @comments.each do |comment| %>
+  <% if comment.photo_id == @photo.id %>
+      <div class="fuente-tres" style="color:#49aec3"><strong><%= comment.user.username%> :</strong>
+      <% if current_user.try(:admin?) || current_user == comment.user %>
+      <%= link_to 'eliminar', comment, method: :delete, data: { confirm: 'Esta seguro que desea eliminar el comentario?' } %>
+        <% end %> </div>
+
+        <div><%= simple_format(comment.content,  :style => "color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;") %></div>
+        
+  <% end %> 
+<% end %>
+<hr>
+<% if @allphotos == 0 %>
+<div><%= link_to "→ MOSTRAR TODOS LOS COMENTARIOS", photo_path(:id => @photo.id, :allphotos => 1),:class => "link-azul" %></div>
+<% end %>
+<% if @allphotos == 1 %>
+<div><%= link_to "→ MOSTRAR SOLO LOS ULTIMOS COMENTARIOS.", photo_path(:id => @photo.id, :allphotos => 0),:class => "link-azul" %></div>
+<% end %>
+
+<% else %>
+<div class = "secciones" style = "font-size:200%">LA FOTO TODAVIA NO TIENE COMENTARIOS, SE EL PRIMERO!</div>
+<% end %>

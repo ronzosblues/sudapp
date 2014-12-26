@@ -1,0 +1,25 @@
+<div class="secciones">A M I G O S</div>
+<hr>
+
+<% if current_user.try(:admin)
+link_to 'Agregar amigo', new_amigo_path
+end
+ %>
+
+    <% @amigos.each do |amigo| %>
+<p>
+        <div div class = "secciones" style = "font-size:200%"><%= amigo.name.upcase %></div>
+        <div ><div><%= link_to amigo.web.downcase, amigo.web, :class => "fuente-tres" %></div></div>
+        <% if current_user.try(:admin)%>
+        | <%= link_to 'Editar', edit_amigo_path(amigo) %> |
+        <%= link_to 'Eliminar', amigo, method: :delete, data: { confirm: 'Esta seguro?' } %> |
+        <% end %>
+
+        </p>
+
+    <% end %>
+
+
+<br>
+
+

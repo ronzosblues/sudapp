@@ -1,6 +1,10 @@
 class Post < ActiveRecord::Base
 
-	has_many :comment_posts
+	has_many :comment_posts, :dependent => :destroy
+
+	has_many :photo_posts, :dependent => :destroy
+
+	has_many :video_posts, :dependent => :destroy
 
 	has_attached_file :post_photo
 

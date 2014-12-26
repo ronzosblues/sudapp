@@ -1,0 +1,12 @@
+<% @skater_id = params[:skater_id].to_i
+@skater_name = params[:skater_name]
+%>
+
+<h1 style = "color:#B28D8D;">Agregar fotos al perfil</h1><br>
+
+<div style = "color:#B28D8D;">Skater: <%= @skater_name.upcase %></div><br>
+
+<%= render 'form' %>
+
+<%= link_to '→ Volver', skaters_path %>
+

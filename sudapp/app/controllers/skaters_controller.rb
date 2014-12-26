@@ -20,6 +20,7 @@ class SkatersController < ApplicationController
 
   # GET /skaters/1/edit
   def edit
+    admin_check
   end
 
   # POST /skaters
@@ -29,7 +30,7 @@ class SkatersController < ApplicationController
 
     respond_to do |format|
       if @skater.save
-        format.html { redirect_to @skater, notice: 'Skater was successfully created.' }
+        format.html { redirect_to @skater, notice: 'El perfil fue creado exitosamente.' }
         format.json { render action: 'show', status: :created, location: @skater }
       else
         format.html { render action: 'new' }
@@ -43,7 +44,7 @@ class SkatersController < ApplicationController
   def update
     respond_to do |format|
       if @skater.update(skater_params)
-        format.html { redirect_to @skater, notice: 'Skater was successfully updated.' }
+        format.html { redirect_to @skater, notice: 'El perfil fue editado exitosamente.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -57,7 +58,7 @@ class SkatersController < ApplicationController
   def destroy
     @skater.destroy
     respond_to do |format|
-      format.html { redirect_to skaters_url }
+      format.html { redirect_to :controller => "/skaters", :action => "index"}
       format.json { head :no_content }
     end
   end
