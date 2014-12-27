@@ -14,8 +14,8 @@ Appl::Application.configure do
   :address              => "smtp.gmail.com",
   :port                 => 587,
   :domain               => "http://sudamericapp.herokuapp.com/",
-  :user_name            => ENV['SUDAPP_MAIL'],
-  :password             => ENV['SUDAPP_MAIL_PASS'],
+  :user_name            => "sudamerica.contacto@gmail.com",
+  :password             => "cachorro123!",
   :authentication       => "plain",
   :enable_starttls_auto => true
 }
