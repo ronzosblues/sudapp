@@ -1,0 +1,48 @@
+
+<div class="secciones">V I D E O S</div>
+
+
+<% if current_user.try(:admin?) %>
+<%= link_to 'Agregar video', new_video_path %> 
+<% end %>
+<br>
+
+
+
+
+<ul class="small-block-grid-3 my-grid">
+
+    <% @videos_code = "" %>
+    <% @videos.each do |video| %>
+
+<% if video.video_url.include? "youtube.com"
+@numero = video.video_url.partition("=").last
+@video_code = '<iframe width="100%" src="//www.youtube.com/embed/'+@numero+'" frameborder="0" allowfullscreen></iframe>'
+end %>
+
+<% if video.video_url.include? "vimeo.com" 
+ @numero = video.video_url.partition(".com/").last
+ @video_code = '<iframe width="100%" src="//player.vimeo.com/video/'+@numero+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+ end %>
+
+      
+        <li>
+        <p><div style="color:#BDBDBD;font-family: 'Carrois Gothic SC', sans-serif;"><%= link_to video.video_title.upcase, video ,:class => "fuente-tres" %></div></p>
+        <p></p>
+
+        <p><%= @video_code.html_safe %></p>
+
+        <p></p>
+        <% if current_user.try(:admin?)%>
+        | <%= link_to ' Editar', edit_video_path(video) %> |
+        <%= link_to ' Eliminar', video, method: :delete, data: { confirm: 'Esta seguro que desea eliminar el video?' } %> |
+        <%= link_to ' Elegir como video destacado', :controller => '/videos', :action => 'inicio', :id => video.id %> |
+        <% end %>
+        <p></p>
+        </li>
+    <% end %>
+</ul>
+
+<br>
+
+

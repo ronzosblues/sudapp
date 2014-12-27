@@ -1,0 +1,33 @@
+<% @skater_id = params[:skater_id].to_i
+@skater_name = params[:skater_name]
+%>
+
+
+<%= form_for(@video_skater) do |f| %>
+  <% if @video_skater.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@video_skater.errors.count, "error") %> prohibited this video_skater from being saved:</h2>
+
+      <ul>
+      <% @video_skater.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Titulo' %><br>
+    <%= f.text_field :video_skater_title %>
+  </div>
+  <div class="field">
+    <%= f.label 'Url' %><br>
+    <%= f.text_field :video_skater_url %>
+  </div>
+  <div>
+    <%= f.hidden_field :skater_id, :value => @skater_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'enviar' %>
+  </div>
+<% end %>

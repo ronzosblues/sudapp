@@ -1,0 +1,3 @@
+class ActivacionIndumentariaController < ApplicationController
+
+end

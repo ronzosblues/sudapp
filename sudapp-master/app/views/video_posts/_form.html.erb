@@ -1,0 +1,32 @@
+<% @post_id = params[:post_id].to_i
+@post_title = params[:post_title]
+%>
+
+<%= form_for(@video_post) do |f| %>
+  <% if @video_post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@video_post.errors.count, "error") %> prohibited this video_post from being saved:</h2>
+
+      <ul>
+      <% @video_post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Titulo' %><br>
+    <%= f.text_field :video_post_title %>
+  </div>
+  <div class="field">
+    <%= f.label 'Url' %><br>
+    <%= f.text_field :video_post_url %>
+  </div>
+  <div>
+    <%= f.hidden_field :post_id, :value => @post_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'enviar' %>
+  </div>
+<% end %>

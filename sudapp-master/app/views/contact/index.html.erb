@@ -1,0 +1,43 @@
+<div class="secciones">C O N T A C T O</div>
+<br>
+<p style="color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;">Envienos su mensaje, trataremos de responderlo en la brevedad.</p>
+
+<% if user_signed_in? %>
+
+
+  <%= form_tag :controller => '/admin', :action => 'contact_email_signed_in' do %>
+  <%= label_tag 'Asunto' %>
+  <%= text_field_tag 'asunto' %>
+
+  <%= label_tag 'Mensaje' %>
+  <%= text_area_tag 'mensaje' %>
+  <p></p>
+
+  <%= hidden_field :user, :value => current_user.try(:username) %>
+  <%= submit_tag "Enviar" %>
+
+<% end %>
+
+
+<% else %>
+<%= form_tag :controller => '/admin', :action => 'contact_email' do %>
+  
+  <%= label_tag 'Email' %>
+  <%= email_field_tag 'email' %>
+
+  <%= label_tag 'Asunto' %>
+  <%= text_field_tag 'asunto' %>
+
+  <%= label_tag 'Mensaje' %>
+  <%= text_area_tag 'mensaje' %>
+  <p></p>
+
+  <%= hidden_field :user, :value => current_user.try(:username) %>
+  <%= submit_tag "Enviar" %>
+
+
+
+
+
+<% end %>
+<% end %>

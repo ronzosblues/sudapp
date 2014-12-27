@@ -1,0 +1,45 @@
+
+<div class="secciones">P E D I D O S</div>
+<% @tienepedido  %>
+<% @total = 0 %>
+<% @no_hay_pedidos = 1 %>
+<p></p>
+
+    <% User.all.each do |usuario| %>
+
+        <% Pedido.all.each do |pedido| %>
+            <% if pedido.user == usuario %>
+                 <% @tienepedido = 1 %>
+                    <% break %>
+            <% else %>
+                 <% @tienepedido = 0 %>
+            <% end %>
+        <% end %>
+
+        <% if @tienepedido == 1 %>
+        <% @no_hay_pedidos = 0 %>
+        <p style = "color:#B28D8D;"><%= usuario.username.upcase %> | <%= usuario.email %></p>
+        
+        <% Pedido.all.each do |pedido| %>
+        <% if pedido.user == usuario %>
+
+            Producto: <%= link_to pedido.producto.nombre_producto, pedido %> | Fecha: <%= pedido.fecha %> | precio: $<%= pedido.producto.precio %> | <%= link_to 'Eliminar', pedido, method: :delete, data: { confirm: 'Esta seguro que desea eliminar este pedido?' } %>
+            <% @total = @total + pedido.producto.precio %>
+            <p></p>
+   
+        <% end %>
+        <% end %>
+          <p style = "color:#B28D8D;">Total: $<%= @total %></p>
+        <hr>
+
+        <% end %>
+    <% end %>
+
+<% if @no_hay_pedidos == 1 %>
+<hr>
+<h4><div class = "titulo">NO TIENE PEDIDOS POR EL MOMENTO</div></h4>
+<hr>
+<% end %>
+
+<br>
+

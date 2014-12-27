@@ -1,0 +1,25 @@
+
+
+<% if current_user.try(:admin?) %>
+| <%= link_to 'Editar', edit_video_path(@video) %> | <%= link_to ' Eliminar',@video, method: :delete, data: { confirm: 'Esta seguro que desea eliminar el video?' } %> | <%= link_to ' Elegir como video destacado', :controller => '/videos', :action => 'inicio', :id => @video.id %> |
+<% end %>
+<p></p>
+
+<% if @video.video_url.include? "youtube.com"
+@numero = @video.video_url.partition("=").last
+@video_code = '<iframe width="100%" height="500px" src="//www.youtube.com/embed/'+@numero+'" frameborder="0" allowfullscreen></iframe>'
+end %>
+
+<% if @video.video_url.include? "vimeo.com" 
+ @numero = @video.video_url.partition(".com/").last
+ @video_code = '<iframe width="100%" height="500px" src="//player.vimeo.com/video/'+@numero+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+ end %>
+<p>
+  <div class = "secciones" style = "font-size:200%"><%= @video.video_title.upcase %></div>
+</p>
+
+<p>
+  <%= @video_code.html_safe %>
+</p>
+<%= link_to '→ Volver', videos_path %>
+

@@ -1,0 +1,9 @@
+<% @post_id = params[:post_id].to_i
+@post_title = params[:post_title]
+%>
+
+<h1 style = "color:#B28D8D;">Agregar video a nota</h1><br>
+
+<%= render 'form' %>
+
+<%= link_to '→ Volver', posts_path %>

@@ -1,0 +1,17 @@
+<%
+nombres =  @resource.username.partition(" ")  
+@nombre=""
+nombres.each do |palabra|
+@nombre = @nombre+palabra.capitalize
+end
+%>
+
+<h4>SUDAMERICA SKATEBOARDING | CONTACTO</h4>
+
+<p>Hola <%= @nombre %>!</p>
+
+<p>Su cuenta ha sido bloqueada debido a un número excesivo de intentos de logueo fallidos.</p>
+
+<p>Haga clic en el enlace de abajo para desbloquear su cuenta:</p>
+
+<p><%= link_to 'Desbloquear mi cuenta', unlock_url(@resource, :unlock_token => @token) %></p>

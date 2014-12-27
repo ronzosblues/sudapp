@@ -1,0 +1,20 @@
+
+<div class="secciones">I N D U M E N T A R I A</div>
+
+<p></p>
+<% if current_user.try(:admin?) %>
+<%= link_to 'Crear nueva categoria de producto', new_tipo_producto_path %>
+<% end %>
+<p></p>
+
+    <% @tipo_productos.each do |tipo_producto| %>
+        <div class="my-div-bottom"><%= link_to tipo_producto.nombre_tipo_producto.upcase, tipo_producto, :class => "fuente-tres" %></div>
+        <% if current_user.try(:admin?) %>
+        |<%= link_to ' Editar', edit_tipo_producto_path(tipo_producto) %> | 
+        <%= link_to ' Eliminar', tipo_producto, method: :delete, data: { confirm: 'Are you sure?' } %> |
+        <% end %>
+        <p></p>
+    <% end %>
+
+<br>
+

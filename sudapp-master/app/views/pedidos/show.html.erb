@@ -1,0 +1,18 @@
+
+<p>
+  <strong>User:</strong>
+  <%= @pedido.user.username %>
+</p>
+
+<p>
+  <strong>Producto:</strong>
+  <%= @pedido.producto.nombre_producto %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @pedido.fecha %>
+</p>
+
+<%= link_to 'Edit', edit_pedido_path(@pedido) %> |
+<%= link_to 'Back', pedidos_path %>

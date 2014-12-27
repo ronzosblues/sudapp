@@ -1,0 +1,23 @@
+
+
+<div class = "secciones" style = "font-size:200%"><%= @producto.nombre_producto.upcase %></div>
+ <% if current_user.try(:admin?) %>
+ | <%= link_to ' Editar', edit_producto_path(@producto) %> |
+ <%= link_to ' Eliminar',@producto, method: :delete, data: { confirm: 'Esta seguro que desea eliminar el producto?' } %> |
+<% end %>
+<br>
+
+
+
+
+<p>
+<%= image_tag @producto.foto_producto.url, :class => "th" %>
+</p>
+
+<p style="color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;">
+Talles: <%= @producto.talles_producto %> | Precio: $<%= @producto.precio %>
+</p>
+
+  <%= link_to '→ Volver', :controller => "/tipo_productos", :action => "show", :id => @producto.tipo_producto.id %> 
+
+

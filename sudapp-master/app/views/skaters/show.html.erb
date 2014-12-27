@@ -1,0 +1,111 @@
+
+
+  <% if current_user.try(:admin?)%>
+|<%= link_to ' Editar', edit_skater_path(@skater) %> |
+<%= link_to ' Eliminar',@skater, method: :delete, data: { confirm: 'Esta seguro que desea eliminar el perfil?' } %> |
+        <%= link_to 'Agregar fotos al perfil', :controller => '/photo_skaters', :action => 'new', :skater_id => @skater.id, :skater_name => @skater.skater_name %> |
+        <%= link_to 'Agregar video a la nota', :controller => '/video_skaters', :action => 'new', :skater_id => @skater.id, :skater_name => @skater.skater_name %> |
+<p></p>
+<% end %>
+
+<div style="width:100%;">
+
+  <div style="width:50%;float: left !important; padding-right:30px;padding-bottom:0px;position: relative; ">
+    <div class = "secciones" style = "font-size:200%;background-color:#0E0D0D;padding:10px;color:#49aec3;"><%= @skater.skater_name.upcase %> </div>
+    <div><%= image_tag @skater.skater_photo.url , :style=>"width:100%"%></div>
+    <br>
+  </div>
+
+ <%= simple_format(@skater.skater_body, :style => "color:#A4A4A4;font-family: 'Carrois Gothic SC', sans-serif;") %>
+
+
+</div>
+<div style="width: 100%"><img src="/images/blackline.jpg" style="width:100%;"/></div>
+ <% 
+    @tienevideo
+    Skater.all.each do |skater| 
+         VideoSkater.all.each do |video| 
+             if video.skater == skater 
+                  @tienevideo = 1 
+                     break 
+             else 
+                  @tienevideo = 0 
+             end 
+         end 
+         end
+         %>
+
+ <% if @tienevideo == 1 %>
+
+
+ <ul class="small-block-grid-1 my-grid">
+
+ <%
+        VideoSkater.all.each do |video|
+        if video.skater_id == @skater.id %>
+        <% @video = video %>
+      
+        <% if @video.video_skater_url.include? "youtube.com"
+        @numero = @video.video_skater_url.partition("=").last
+        @video_code = '<iframe width=100% height=400px src="//www.youtube.com/embed/'+@numero+'" frameborder="0" allowfullscreen></iframe>'
+        end %>
+        <% if @video.video_skater_url.include? "vimeo.com" 
+         @numero = @video.video_skater_url.partition(".com/").last
+         @video_code = '<iframe width=100% height=400px  src="//player.vimeo.com/video/'+@numero+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+        end %>
+
+        <li><div><div class = "secciones" style = "font-size:200%"><%= link_to video.video_skater_title.upcase, video, :video_id => video.id %></div>
+        <br>
+           <% if current_user.try(:admin?) %>
+                | <%= link_to 'Editar', (edit_video_skater_path(:id => video.id, :skater_id => @skater.id, :skater_name => @skater.skater_name)) %> |
+                <%= link_to 'Eliminar', video, method: :delete, data: { confirm: 'Esta seguro que desea eliminar la foto?' } %> |
+              <% end %> </div>
+              </li>
+  
+        <li><div><%= @video_code.html_safe %></div><hr></li>
+        
+      <% end %>
+
+    <% end%>
+</ul> 
+
+<% end %>
+
+ <% 
+    @tienefoto
+    Skater.all.each do |skater| 
+         PhotoSkater.all.each do |foto| 
+             if foto.skater == skater 
+                  @tienefoto = 1 
+                     break 
+             else 
+                  @tienefoto = 0 
+             end 
+         end 
+         end
+         %>
+
+ <% if @tienefoto == 1 %>
+ <ul class="small-block-grid-3 my-grid">
+ 
+   <% PhotoSkater.all.each do |photo| %>
+   <% @url = "background-image: url("+photo.photo.path+");"%>
+        <% if photo.skater_id == @skater.id %>
+              <li>
+              <div ><%=link_to (photo_skater_path(:id => photo.id, :allphotos => 0)){image_tag photo.photo.url, :class => "galeria"}%></div>
+              <p></p>
+              <% if current_user.try(:admin?) %>
+                | <%= link_to 'Editar', (edit_photo_skater_path(:id => photo.id, :skater_id => @skater.id, :skater_title => @skater.skater_name)) %> |
+                <%= link_to 'Eliminar', photo, method: :delete, data: { confirm: 'Esta seguro que desea eliminar la foto?' } %> |
+              <% end %>
+               </li>
+        <% end %>
+   <% end %>
+ </ul>
+ 
+ <% end %>
+
+
+
+<p></p>
+<%= link_to '→ Volver', skaters_path %>

@@ -1,0 +1,193 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+
+ input[type=submit] {
+    border-radius: 5px;
+    border: 0;
+    font-family: Tahoma;
+    background: #A9F5F2;
+    height: 25px;
+}
+
+
+.back-text-area-field{
+background:#F7F8E0;
+border: 0;
+}
+
+.texto{color:#A4A4A4; font-family: 'Carrois Gothic SC', sans-serif; }
+
+.th-item{
+    height: 11em;
+    width: 100%;
+    overflow: hidden;
+    background-position: center;
+}
+
+img { max-width: 100%; width: 100%;}
+
+.galeria { min-height: 180px; max-height: 180px;}
+
+.imagen-ancho-max { width: 100%;}
+
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6 {
+    
+    line-height: 1;
+    margin-bottom: 0.625rem;
+    color:#F6E3CE ; }
+
+
+
+.top-bar-section li a:not(.button):hover {
+  font-family: 'Pathway Gothic One', sans-serif;
+}
+.top-bar-section li a:not(.button) {
+  font-family: 'Pathway Gothic One', sans-serif;
+}
+
+.link-azul{font-family: 'Carrois Gothic SC', sans-serif;}
+a.link-azul:link {color:#49aec3;}      /* unvisited link */
+a.link-azul:visited {color:#49aec3;}  /* visited link */
+a.link-azul:hover {color:#49aec3;}  /* mouse over link */
+a.link-azul:active {color:#49aec3;}  /* selected link */
+
+a:link {color:#A4A4A4;}      /* unvisited link */
+a:visited {color:#A4A4A4;}  /* visited link */
+a:hover {color:#FFFFFF;background: transparent;}  /* mouse over link */
+a:active {color:#A4A4A4;}  /* selected link */
+
+a.titulo2:link {color:#FFFFFF;}      /* unvisited link */
+a.titulo2:visited {color:#FFFFFF;}  /* visited link */
+a.titulo2:hover {color:#61380B;background: transparent;}  /* mouse over link */
+a.titulo2:active {color:#FFFFFF;}  /* selected link */
+
+
+a.fuente-tres:link {color:#A4A4A4;}      /* unvisited link */
+a.fuente-tres:visited {color:#A4A4A4;}  /* visited link */
+a.fuente-tres:hover {color:#FFFFFF; background-color: transparent}  /* mouse over link */
+a.fuente-tres:active {color:#A4A4A4;}  /* selected link */
+
+a.fuente-uno:link {color:#FFFFFF;font-size:200%}      /* unvisited link */
+a.fuente-uno:visited {color:#FFFFFF;}  /* visited link */
+a.fuente-uno:hover {color:#61380B;}  /* mouse over link */
+a.fuente-uno:active {color:#FFFFFF;}  /* selected link */
+
+a.fuente-dos:link {color:#61380B;font-size:150%}      /* unvisited link */
+a.fuente-dos:visited {color:#61380B;}  /* visited link */
+a.fuente-dos:hover {color:#FFFFFF;}  /* mouse over link */
+a.fuente-dos:active {color:#FFFFFF;}  /* selected link */
+
+.fuente-uno{
+font-family: 'AAnton', serif;
+font-size: 200%;
+}
+.fuente-dos{
+font-family: 'Anton', serif;
+font-size: 150%;
+color: #FFFFFF;
+/*color: #49aec3;*/
+}
+.fuente-tres{
+font-family: 'Carrois Gothic SC', sans-serif;
+background: transparent
+}
+.fuente-cuatro{
+font-family: 'Anton', serif;
+font-size: 100%;
+color: #FFFFFF;
+/*color: #49aec3;*/
+}
+
+
+.fuente-errores{
+font-family: 'Carrois Gothic SC', sans-serif;
+color:#866A6A ;
+}
+
+.titulo{
+font-family: 'Oswald-Regular', serif;
+font-size: 200%;
+color:#49aec3
+}
+
+.titulo2{
+font-family: 'Oswald-Regular', serif;
+font-size: 100%;
+color:#A9F5E1
+}
+
+
+.my-div-bottom{
+  border-width: 2px; 
+  border-bottom-width:1px; 
+  border-bottom-color:#101010 ; 
+  border-bottom-style: solid;
+}
+
+.my-div-bottom-green{
+  border-width: 2px; 
+  border-bottom-width:1px; 
+  border-bottom-color:#07190B; 
+  border-bottom-style: solid;
+}
+.my-div-bottom-dark{
+  border-width: 2px; 
+  border-bottom-width:1px; 
+  border-bottom-color:#1C1B1B; 
+  border-bottom-style: solid;
+  font-family: 'Carrois Gothic SC', sans-serif;
+}
+
+ul{
+list-style-type: none;
+}
+
+.link-menu{
+  font-family: 'Pathway Gothic One';
+  width:100%;
+  padding: 5px; 
+  border-bottom: solid 1px #424242
+}
+
+.footer-estilo{width:100%;padding-left:25%;color:#A4A4A4;font-family: 'Pathway Gothic One', sans-serif;}
+
+.para-comentar{width:100%;color:#A4A4A4;font-family: 'Pathway Gothic One', sans-serif;}
+
+.secciones{width:100%;color:#866a6a;font-family: 'Pathway Gothic One', sans-serif;}
+
+.titulo-gotico{font-size: 200%;;color:#EEE3D8;font-family: 'Arial Black', sans-serif;}
+
+
+.menu-color{}
+.link-imagen{}
+
+a.link-menu:link {color:#FFFFFF;}      /* unvisited link */
+a.link-menu:visited {color:#FFFFFF;}  /* visited link */
+a.link-menu:hover {color:#49aec3;background: transparent;}  /* mouse over link */
+a.link-menu:active {color:#FFFFFF;}  /* selected link */
+
+a.link-imagen:hover {background: transparent;}  /* mouse over link */
+a.link-imagen:active {color:#FFFFFF;}  /* selected link */
+
+a.menu-color:link {color:#FFFFFF;}      /* unvisited link */
+a.menu-color:visited {color:#FFFFFF;}  /* visited link */
+a.menu-colorlink-menu:hover {color:#49aec3;background: transparent;}  /* mouse over link */
+a.menu-color:active {color:#FFFFFF;}  /* selected link */
+
+a[href$=jpg], a[href$=jpeg], a[href$=jpe], a[href$=png], a[href$=gif] {
+    text-decoration: none;
+    border: 0 none;
+    background-color: transparent;
+    }

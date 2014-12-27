@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Sudamerica | Skateboarding</title>
+  <link href="../assets/css/foundation.css" rel="stylesheet">
+  <link href="../assets/application.css" rel="stylesheet">
+
+  <%= javascript_include_tag "vendor/modernizr" %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  
+
+<%= csrf_meta_tag %>
+
+
+<style type="text/css">
+
+body {
+    background: url(/images/fondo.jpg) no-repeat center center fixed;
+}
+
+@font-face {
+  font-family: 'Pathway Gothic One';
+  font-style: normal;
+  font-weight: 400;
+  src: url('<%= asset_path('PathwayGothicOne-Regular.ttf') %>');
+}
+
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  src: url('<%= asset_path('Oswald-Bold.ttf') %>');
+}
+
+@font-face {
+  font-family: 'Oswald-Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('<%= asset_path('Oswald-Regular.ttf') %>');
+}
+
+
+@font-face {
+  font-family: 'Carrois Gothic SC';
+  font-style: normal;
+  font-weight: 400;
+  src: url('<%= asset_path('CarroisGothicSC-Regular.ttf') %>');
+}
+
+@font-face {
+  font-family: 'BebasNeue';
+  font-style: normal;
+  font-weight: 400;
+  src: url('<%= asset_path('BebasNeue.ttf') %>');
+}
+
+@font-face {
+  font-family: 'basictitlefont';
+  font-style: normal;
+  font-weight: 400;
+  src: url('<%= asset_path('basictitlefont.ttf') %>');
+}
+
+
+hr {
+  border: 0;
+  color: #1C1B1B;
+  background-color: #1C1B1B;
+  height: 1px;
+}
+  
+a.fuente-tres:link {color:#A4A4A4;}      /* unvisited link */
+a.fuente-tres:visited {color:#A4A4A4;}  /* visited link */
+a.fuente-tres:hover {color:#FFFFFF; background: transparent;}  /* mouse over link */
+a.fuente-tres:active {color:#A4A4A4;}  /* selected link */
+
+</style>
+
+</head>
+<body>
+<br>
+<div class="row display">
+<div class="large-12 columns" style="overflow: hidden; width: 100%;"><span class="show-for-small"></span><span class="hide-for-small">
+
+<%
+@header = nil
+@banner = nil
+@footer = nil
+Image.all.each do |image|
+if image.label.start_with?('header')
+  @header = image
+end
+if image.label.start_with?('banner')
+  @banner = image
+end
+if image.label.start_with?('footer')
+  @footer = image
+end
+end
+ %>
+
+<% if @header != nil %>
+<%= image_tag @header.photo.url, :style => "width:100%;"  %><br>
+<% if current_user.try(:admin) %>
+
+<div style="background-color:#151515; padding: 15px; width:100%;">
+<div ><%= link_to 'EDITAR HEADER', edit_image_path(:id => @header.id), :class => "fuente-tres" %></div></div>
+<% end %>
+<% else %>
+<div style="background-color:#151515; padding: 15px; width:100%;">
+<%= link_to 'CREAR HEADER', new_image_path(:label => "header"), :class => "fuente-tres" %>
+</div>
+<% end %>
+
+
+ <nav class="top-bar"  data-topbar >
+
+       <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+    
+      <% if user_signed_in? %> 
+       <%
+        @nombre =  current_user.username.downcase 
+        @nombreusernav = ""
+        @nombre.each_char do |c| 
+        @nombreusernav = @nombreusernav+c+" "
+        end
+        %>
+
+
+      <li>
+        <a style="color:#49aec3;"><%= @nombreusernav %></a>
+        </li>
+        <li class="divider"></li>
+        <li><%= link_to "p e d i d o s",  :controller => "/pedidos", :action => "pedidos_user", :style => "color:#49aec3;" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "s a l i r", destroy_user_session_path, :method => :delete %></li>
+
+        
+      
+
+<% else %>
+<li class="name">
+ <%= link_to "→ e n t r a r", new_user_session_path %>
+</li>
+<li class="divider"></li>
+ <li class="name">
+  <%= link_to "r e g i s t r a t e", new_user_registration_path %>
+  </li>
+
+<% end %>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <% if current_user.try(:admin?)%>
+            <li><a href="/admin"><div style = "color:#49aec3;">a d m i n i s t r a d o r</div></a></li>
+            <li class="divider"></li>
+      <% end %>
+            <li><%= link_to "i n i c i o",  :controller => "/welcome" %></li>
+            <li class="divider"></li>
+            <li><%= link_to "n o t a s / e n t r e v i s t a s",  :controller => "/posts" %></li>
+            <li class="divider"></li>
+            <li><%= link_to "f o t o g r a f í a",  :controller => "/albums" %>
+            </li>
+            <li class="divider"></li>
+            <li><%= link_to "p e r f i l e s",  :controller => "/skaters" %></li>
+             <li class="divider"></li>
+             <li><%= link_to "v i d e o",  :controller => "/videos" %></li>
+              <li class="divider"></li>
+            <!--
+             
+             
+             <li><%= link_to "i n d u m e n t a r i a",  :controller => "/tipo_productos" %></li>
+            <li class="divider"></li> 
+          -->
+            <li><%= link_to "c o n t a c t o",  :controller => "/contact" %></li>
+            <li class="divider"></li>
+            <li><%= link_to "a m i g o s / s i t i o s",  :controller => "/amigos" %></li>
+               <li class="divider"></li>
+            
+    </ul>
+  </section>
+      </nav>
+
+  <div>
+
+<div style="color:#FFFFFF ;background-color: black; position: relative; width: 75%; float: left !important; padding-bottom: 1000px; margin-bottom: -1000px;border-color: transparent;">
+
+
+<div style = "padding:0px 20px 20px 20px">
+<p>
+  <% flash.each do |name, msg| %>
+<%= content_tag :div, msg.upcase, :id => "flash_#{name}", :class => "fuente-errores" %>
+<% end %>
+</p>
+
+<% if @banner != nil %>
+<%= image_tag @banner.photo.url, :style => "width:100%;"  %><br>
+<% if current_user.try(:admin) %>
+<div style="background-color:#151515; padding: 15px; width:100%;">
+<div ><%= link_to 'EDITAR BANNER', edit_image_path(:id => @banner.id), :class => "fuente-tres" %></div></div>
+<% end %>
+<% else %>
+<% if @header != nil %>
+<div style="background-color:#151515; padding: 15px; width:100%;">
+<%= link_to 'CREAR BANNER', new_image_path(:label => "banner"), :class => "fuente-tres" %>
+</div>
+<% end %>
+<% end %>
+
+<% if @banner != nil %>
+<% if @footer == nil %>
+<div style="background-color:#151515; padding: 15px; width:100%;">
+<%= link_to 'CREAR FOOTER', new_image_path(:label => "footer"), :class => "fuente-tres" %>
+</div>
+<% end %>
+<% end %>
+
+</p>
+
+<%= yield %>
+
+
+</div>
+
+<br>
+
+<div style="width: 100%; padding-top:30px;">
+
+  <div style="width: 25%; float: left !important; position: relative; bottom:0;border-right: solid 1px #A4A4A4 ">
+
+    <div style="width:100%" ><a class= "link-imagen" href="/contact"><img src="/images/contacto.jpg" style="width:100%;"/></a></div>
+    <div style="width:100%" ><a class= "link-imagen" href="/videos"><img src="/images/videos.png" style="width:100%;"/></a></div>
+
+      <% if ActivacionIndumentaria.first.try(:activacion)%>
+    <div style="width:100%" ><a class= "link-imagen" href="/posts"><img src="/images/notas.jpg" style="width:100%;"/></a></div>
+    <% end %>
+
+    
+  </div>
+
+<div style="width: 25%; float: left !important; position: relative; bottom:0;border-right: solid 1px #A4A4A4">
+    <div style="width:100%" ><a class= "link-imagen" href="/albums"><img src="/images/fotos.png" style="width:100%;"/></a></div>
+    <% if ActivacionIndumentaria.first.try(:activacion)%>
+    <div style="width:100%" ><a class= "link-imagen" href="/tipo_productos"><img src="/images/indumentaria.png" style="width:100%;"/></a></div>
+    <% end %>
+    <div style="width:100%" ><a class= "link-imagen" href="https://www.facebook.com/pages/Sudamerica-Cultura-Skateboarder/122207241198834?ref=hl"><img src="/images/facebook.png" style="width:100%;"/></a></div>
+   
+  </div>
+
+     <% if ActivacionIndumentaria.first.try(:activacion)%>
+<div style="width: 50%; float: left !important; position: relative; bottom:0;padding-right:45px;padding-top:25px ">
+    <% else %>
+<div style="width: 50%; float: left !important; position: relative; bottom:0;padding-right:45px; ">    
+    <% end %>
+
+  <div class="footer-estilo" >S U D A M E R I C A S K A T E B O A R D I N G @ G M A I L . C O M </div>
+  <div class="footer-estilo" style="color:#FFFFFF"  >E L &nbsp P R I M E R &nbsp S I T I O &nbsp</div>
+<div class="footer-estilo" style="color:#FFFFFF"  >I N D E P E N D I E N T E &nbsp D E &nbsp</div> 
+<div class="footer-estilo" style="color:#FFFFFF" >L A &nbsp C I U D A D </div>
+<div class="footer-estilo" >S U D A M E R I C A &nbsp S K A T E B O A R D I N G</div>
+
+</div>
+
+
+
+
+</div>
+
+
+<% if @footer != nil %>
+<%= image_tag @footer.photo.url, :style => "width:100%;"  %><br>
+<% if current_user.try(:admin) %>
+<div style="background-color:#151515; padding: 15px; width:100%;">
+<div ><%= link_to 'EDITAR FOOTER', edit_image_path(:id => @footer.id), :class => "fuente-tres" %></div></div>
+<% end %>
+<% end %>
+
+
+</div>
+
+<div style = "position: relative; width: 25%; float: right !important; padding-bottom: 1000px; margin-bottom: -1000px; background-color:transparent"> <!-- contenedor de la barra derecha -->
+
+
+<div div style=" width:100%;color:#FFFFFF ;background-color: black; border-color: transparent; padding:0px">
+<div class="link-menu">M E N U</div>
+<div class="link-menu"><%= link_to "F O T O G R A F I A", {:controller => "/albums", :class => "menu-color"} %></div>
+<div class="link-menu"><%= link_to "N O T A S", {:controller => "/posts", :class => "menu-color"} %></div>
+<div class="link-menu"><%= link_to "P E R F I L E S", {:controller => "/skaters", :class => "menu-color"} %></div>
+<div class="link-menu"><%= link_to "A M I G O S / S I T I O S", {:controller => "/amigos", :class => "menu-color"} %></div>
+
+        <% if ActivacionIndumentaria.first.try(:activacion)%>
+        <div class="link-menu"><%= link_to "I N D U M E N T A R I A / P R O D U C T O S", {:controller => "/tipo_productos", :class => "menu-color"} %></div>
+        <% else %>
+        <div class="link-menu"><%= link_to "C O N T A C T O", {:controller => "/contact", :class => "menu-color"} %></div>
+        <% end %>
+        <div class="link-menu"><%= link_to "V I D E O ", {:controller => "/videos", :class => "menu-color"} %></div>
+</div>
+
+<div style = " padding-left:10px">
+
+<br>
+
+        <p style="color:#49aec3;font-family: 'Carrois Gothic SC', sans-serif;">El sitio independiente de skateboarding de la ciudad de Rosario.</p>
+
+
+   <div style="width:100%"><div class = "secciones" style="padding: 10px 10px 10px 10px;background-color:#151515;color:#866A6A; ">V I D E O &nbsp D E S T A C A D O</div></div>    
+      <div style=" width:100%;color:#FFFFFF ;background-color: #000000; border-color: transparent;">    
+      <div style="padding:10px 10px 10px 10px; ">  
+      <%
+        Video.all.each do |video|
+        if video.try(:inicio) %>
+        <% @video = video %>
+        
+        <div style="width:100%, "><div><%= link_to @video.video_title.upcase,@video,:class => "link-azul" %></div></div>
+
+        </div>
+    
+      <div style="width:100%">
+        <% if @video.video_url.include? "youtube.com"
+        @numero = @video.video_url.partition("=").last
+        @video_code = '<iframe width="100%" src="//www.youtube.com/embed/'+@numero+'" frameborder="0" allowfullscreen></iframe>'
+        end %>
+        <% if @video.video_url.include? "vimeo.com" 
+         @numero = @video.video_url.partition(".com/").last
+         @video_code = '<iframe width="100%" src="//player.vimeo.com/video/'+@numero+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+        end %>
+
+        <div><%= @video_code.html_safe%></div>
+      </div>
+        <br>
+      <% end %>
+    <% end%>
+    </div>  
+    <br>
+
+     
+  <div style=" width:100%;color:#FFFFFF ;background-color: #000000; border-color: transparent;"> 
+  <div style="width:100%"><div class = "secciones" style="padding: 10px 10px 10px 10px;background-color:#151515;color:#866A6A; ">U L T I M A S &nbsp N O T A S</div></div>  
+
+       <% Post.find(:all, :order => "created_at DESC", :limit => 4).each do |post| 
+        if post.try(:post_title)
+        %>
+       <div style="width:100%"><div class="my-div-bottom-dark" style="padding:10px 10px 10px 10px; "><%= link_to post.post_title.upcase,post,:class => "link-azul" %></div></div>
+       <% end %>
+       <% end %>
+          <div style="width:100%"><div style="padding:10px 10px 10px 10px; "><%= link_to "→ VER TODAS",{:controller => "/posts"},:class => "link-azul", :style => "color:#866A6A" %></div></div>
+  </div>   
+
+            <p></p>
+
+    
+    </div>
+
+</div> <!-- fin contenedor de la barra derecha -->
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

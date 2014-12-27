@@ -1,0 +1,35 @@
+<div class="secciones">E D I T A R <%= resource_name.to_s.humanize %></div>
+<br>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label "Usuario" %><br />
+  <%= f.text_field :username, :autofocus => true %></div>
+
+  <div><%= f.label "Email" %><br />
+  <%= f.email_field :email %></div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div><%= f.label "Contraseña" %> <i>(leave blank if you don't want to change it)</i><br />
+  <%= f.password_field :password, :autocomplete => "off" %></div>
+
+  <div><%= f.label "Confirmar contraseña" %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label "Contraseña actuual" %> <i>(we need your current password to confirm your changes)</i><br />
+  <%= f.password_field :current_password %></div>
+
+  <div><%= f.submit "enviar" %></div>
+<% end %>
+
+<div class="fuente-dos">CANCELAR MI CUENTA</div>
+
+<p>No esta conforme? <%= button_to "Cancelar mi cuenta", registration_path(resource_name), :data => { :confirm => "Esta seguro que desea eliminar su cuenta?" }, :method => :delete %></p>
+
+<%= link_to "Volver", :back %>
+
+
+<!--admin = User.create(:username => "admin_ronzo",:email => "ronzo.orlandini@gmail.com",:password => "121212",:password_confirmation => "121212",:admin => 1)-->

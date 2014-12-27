@@ -1,0 +1,14 @@
+<h1 style = "color:#B28D8D;">Enviar email a los usuarios</h1>
+<p style = "color:#B28D8D;">La siguiente información se enviará a todos los usuarios</p>
+
+<%= form_tag :controller => '/admin', :action => 'dispatch_email' do %>
+
+  <%= label_tag 'Asunto' %>
+  <%= text_field_tag 'asunto' %>
+
+  <%= label_tag 'Mensaje' %>
+  <%= text_area_tag 'mensaje' %>
+  <p></p>
+  <%= submit_tag "Enviar" %>
+
+<% end %>

@@ -1,0 +1,29 @@
+
+<% @skater_id = params[:skater_id].to_i
+@skater_name = params[:skater_name]
+%>
+
+<%= form_for(@photo_skater) do |f| %>
+  <% if @photo_skater.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@photo_skater.errors.count, "error") %> prohibited this photo_skater from being saved:</h2>
+
+      <ul>
+      <% @photo_skater.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Foto' %><br>
+    <%= f.file_field :photo %>
+  </div>
+ <div>
+    <%= f.hidden_field :skater_id, :value => @skater_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'enviar' %>
+  </div>
+<% end %>

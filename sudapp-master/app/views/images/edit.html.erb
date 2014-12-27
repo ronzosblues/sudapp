@@ -1,0 +1,17 @@
+<% @label = @image.label %>
+
+<% if @image.label.start_with?('header')%>
+<h1 style = "color:#B28D8D;">Editar header</h1>
+<% end %>
+
+<% if @image.label.start_with?('banner')%>
+<h1 style = "color:#B28D8D;">Editar banner</h1>
+<% end %>
+
+<% if @image.label.start_with?('footer')%>
+<h1 style = "color:#B28D8D;">Editar footer</h1>
+<% end %>
+
+<%= render 'form' %>
+
+<%= link_to '→ Volver al administrador', :controller => "/admin" %>

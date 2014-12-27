@@ -1,0 +1,43 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Titulo" %>
+    <%= f.text_field :post_title %>
+  </div>
+   <div class="field">
+    <%= f.label "Autor" %>
+    <%= f.text_field :post_autor %>
+  </div>
+
+    <div class="field">
+    <%= f.label "Foto Principal" %>
+    <%= f.file_field :post_photo %>
+  </div>
+
+   <div class="field">
+    <%= f.label "Foto sacada por:" %>
+    <%= f.text_field :post_photographer %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label "Contenido" %>
+    <%= f.text_area :post_body %>
+
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Enviar" %>
+  </div>
+<% end %>

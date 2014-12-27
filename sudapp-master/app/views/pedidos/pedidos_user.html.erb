@@ -1,0 +1,24 @@
+<% @no_hay_pedidos = 1 %>
+
+
+<div class="fuente-dos">PEDIDOS</div>
+<br>
+
+        <% Pedido.all.each do |pedido| %>
+            <% if pedido.user == current_user %>
+                 <% @no_hay_pedidos = 0 %>
+            Producto: <%= link_to pedido.producto.nombre_producto, pedido %> | Fecha: <%= pedido.fecha %> | precio: $<%= pedido.producto.precio %> | <%= link_to 'Eliminar', pedido, method: :delete, data: { confirm: 'Esta seguro que desea eliminar este pedido?' } %>
+            <p></p>
+        <% end %>
+
+        <% end %>
+
+
+
+
+
+<% if @no_hay_pedidos == 1 %>
+<hr>
+<h4><div class = "titulo">NO TIENE PEDIDOS POR EL MOMENTO</div></h4>
+<hr>
+<% end %>

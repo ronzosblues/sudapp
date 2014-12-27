@@ -1,0 +1,13 @@
+<h1 style = "color:#B28D8D;">Fotos/Post</h1>
+
+
+    <% @photo_posts.each do |photo_post| %>
+    
+        <%= photo_post.photo %>
+        <%= photo_post.post.post_title %>
+        <br>
+    <% end %>
+
+
+<br>
+
