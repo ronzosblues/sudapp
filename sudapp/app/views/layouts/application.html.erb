@@ -109,9 +109,11 @@ end
 <div ><%= link_to 'EDITAR HEADER', edit_image_path(:id => @header.id), :class => "fuente-tres" %></div></div>
 <% end %>
 <% else %>
+<% if current_user.try(:admin) %>
 <div style="background-color:#151515; padding: 15px; width:100%;">
 <%= link_to 'CREAR HEADER', new_image_path(:label => "header"), :class => "fuente-tres" %>
 </div>
+<% end %>
 <% end %>
 
 
